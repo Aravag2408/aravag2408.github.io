@@ -171,3 +171,8 @@ header.page .scribble { position:absolute; right:40px; top:30px; width:130px; }
 .gallery figcaption { font-size:15px; line-height:1.55; color:var(--muted); margin-top:14px; }
 .gallery figcaption b { color:var(--ink); }
 @media (max-width: 860px) { .gallery { grid-template-columns:1fr; } }
+/* Small project cards with images */
+.sm-img { max-width:none; width:calc(100% + 44px); margin:-24px -22px 18px; aspect-ratio:16/10; object-fit:cover; object-position:top; border-bottom:2px solid var(--ink); background:#fff; }
+.sm-img.fit { object-fit:contain; padding:10px; }
+.sm-duo { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin:-24px -22px 18px; border-bottom:2px solid var(--ink); background:var(--ink); }
+.sm-duo img { aspect-ratio:4/3; object-fit:cover; object-position:top right; background:#fff; }
