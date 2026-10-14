@@ -163,3 +163,11 @@ header.page .scribble { position:absolute; right:40px; top:30px; width:130px; }
   .deploy { grid-template-columns:1fr; }
   .deploy .arrow span { transform:rotate(90deg); }
 }
+/* SugarBuddy gallery */
+.gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:26px; margin-top:24px; }
+.gallery figure { margin:0; }
+.gallery figure.wide { grid-column:1 / -1; }
+.gallery img { border:2px solid var(--ink); box-shadow:8px 8px 0 var(--ink); background:#fff; width:100%; }
+.gallery figcaption { font-size:15px; line-height:1.55; color:var(--muted); margin-top:14px; }
+.gallery figcaption b { color:var(--ink); }
+@media (max-width: 860px) { .gallery { grid-template-columns:1fr; } }
