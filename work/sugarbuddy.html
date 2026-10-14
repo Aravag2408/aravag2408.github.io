@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SugarBuddy · Arava Gendelman</title>
+<meta name="description" content="Case study: a full-stack app for teens with Type 1 diabetes and their families, first run on Azure and then moved to free hosting.">
+<meta property="og:title" content="SugarBuddy · case study">
+<meta property="og:description" content="A full-stack family app for teens with Type 1 diabetes. Built on Azure, then moved to a $0 stack so it could stay live.">
+<meta property="og:image" content="https://aravag2408.github.io/assets/img/sugarbuddy-login.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="../index.html">arava<span>.</span></a>
+    <div class="links"><a class="on" href="../work.html">Work</a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+  </nav>
+
+  <header class="cs-head">
+    <div>
+      <div class="meta"><span class="tag b">Case study</span><span class="tag">Full stack</span><span class="tag">Health</span><span class="tag">AI agent</span></div>
+      <h1>SugarBuddy</h1>
+      <p class="sum">A full-stack app for teens with Type 1 diabetes and their families. When a glucose reading looks wrong, it checks in with the teen, works out what probably happened, and helps the parent respond calmly instead of panicking.</p>
+      <div class="actions"><a class="btn" href="https://sugarbuddy.netlify.app" target="_blank" rel="noopener">Open the live app ↗</a><small>The code is private. The app is in Hebrew and needs an account.</small></div>
+    </div>
+    <dl class="facts">
+      <dt>My role</dt><dd>Most of the build: 417 of the team's 532 commits, across the backend, the app, the AI agent and the tests. I also ran the deployment, first on Azure and then on a free setup I moved it to myself.</dd>
+      <dt>Team</dt><dd>Four students, Technion</dd>
+      <dt>When</dt><dd>2026</dd>
+      <dt>Tools</dt><dd>Python, FastAPI, MongoDB, React Native (Expo), WebSockets, Docker, GitHub Actions, Azure, Netlify, OpenRouter</dd>
+      <dt>Code</dt><dd>Private</dd>
+    </dl>
+  </header>
+
+  <div class="cs-body cs-wide">
+    <section>
+      <h2>The problem</h2>
+      <p>Teens with Type 1 diabetes wear a sensor that measures their glucose all day. When a number spikes or drops, the parent usually gets an alarm and nothing else: no context, no idea what happened. The result is worry, and often an argument with the teen.</p>
+      <p>We wanted the opposite: a calm, short conversation that figures out what probably happened and helps the family learn from it over time.</p>
+    </section>
+
+    <section>
+      <h2>What I built</h2>
+      <p>A real product, not a prototype: one app that works in the browser and on iPhone and Android, a backend, a background service that watches the sensor data, and an AI agent. Three kinds of users each get their own experience: the teen, the parent, and other family members the parent chooses to share with.</p>
+      <div class="features">
+        <div class="feature"><h3>Watching the sensor</h3><p>A background service reads each teen's glucose data and flags abnormal events as they happen.</p></div>
+        <div class="feature"><h3>A short check-in with the teen</h3><p>Right after an event, the teen answers a few quick questions about food, insulin and activity.</p></div>
+        <div class="feature"><h3>An AI that investigates</h3><p>The agent weighs the answers and the teen's history, may ask one follow-up question, and explains the most likely cause. It is guarded against misuse and prompt tricks.</p></div>
+        <div class="feature"><h3>Help for the parent</h3><p>The parent gets a clear summary and can send a recommendation, which the AI rewrites in a way that lands with a teenager.</p></div>
+        <div class="feature"><h3>Learning over time</h3><p>Recurring patterns, a long-term memory for each teen, and a personal daily message based on the teen's own entries.</p></div>
+        <div class="feature"><h3>Not alone</h3><p>A community forum and private messages, separated for teens and for parents, with live notifications.</p></div>
+      </div>
+      <div class="arch" role="img" aria-label="System diagram: the glucose sensor feeds a background service, which reports to the backend. The app talks to the backend live. The backend stores data in a database, asks the AI model, and sends notifications.">
+        <div class="node"><b>Glucose sensor</b>each teen's live readings</div>
+        <div class="node core"><b>Backend</b>users and families, events, the AI agent, patterns, memory, forum, live updates</div>
+        <div class="node"><b>App</b>browser, iPhone and Android, for teen, parent and family</div>
+        <div class="node"><b>Background service</b>spots abnormal events and reports them</div>
+        <div class="node"><b>Database, AI model, notifications</b>everything the backend relies on</div>
+      </div>
+      <p class="caption">How the pieces fit together.</p>
+    </section>
+
+    <section>
+      <h2>Keeping it alive: from Azure to $0</h2>
+      <p>The first version ran on Azure. When the cloud budget ran out, the app would have gone dark. I didn't want that, because a health app is only useful if it's actually there. So I moved it myself to a setup that costs nothing to run.</p>
+      <div class="deploy">
+        <div class="card">
+          <h3>Version 1: Azure</h3>
+          <ul>
+            <li>Everything on one Azure virtual machine</li>
+            <li>Docker containers, deployed automatically with GitHub Actions</li>
+            <li>Small AI models running on the same machine</li>
+            <li>Live only while the paid machine was on</li>
+          </ul>
+        </div>
+        <div class="arrow"><span>→</span>budget ran out</div>
+        <div class="card free">
+          <h3>Version 2: free</h3>
+          <ul>
+            <li>The app on Netlify</li>
+            <li>The backend on a free cloud server with a free web address</li>
+            <li>The AI through OpenRouter's free models, which are much larger than the ones before</li>
+            <li>$0 a month, and live all the time</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>The result</h2>
+      <div class="stat-row">
+        <div><b>417 / 532</b><span>commits in the project are mine</span></div>
+        <div><b>3</b><span>kinds of users, each with their own app experience</span></div>
+        <div><b>$0</b><span>a month to keep it running, after the move</span></div>
+      </div>
+      <img class="figure" src="../assets/img/sugarbuddy-login.jpg" alt="The SugarBuddy sign-in screen, with the app's robot mascot and a glucose chart">
+      <p class="caption">The live app's sign-in screen (Hebrew).</p>
+    </section>
+
+    <section>
+      <h2>What I'd do next</h2>
+      <p>Put it in front of a few real families for a month, and measure whether the alerts actually turn into calmer conversations. That is the question the whole app is built around, and only real use can answer it.</p>
+    </section>
+  </div>
+
+  <div class="next-cs"><a class="t" href="achvalens.html">Next: AchvaLens <span>→</span></a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+</div>
+
+<footer>
+  <div class="wrap"><h2>Let's talk<span>.</span></h2><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+</footer>
+</body>
+</html>

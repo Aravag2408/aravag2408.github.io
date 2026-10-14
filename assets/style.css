@@ -90,7 +90,7 @@ header.page .scribble { position:absolute; right:40px; top:30px; width:130px; }
 .more-h { margin-top:24px; padding:40px 0 24px; border-top:2px solid var(--ink); display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; }
 .more-h h2 { font-size:32px; font-weight:800; letter-spacing:-.03em; }
 .more-h p { color:var(--muted); }
-.small-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:26px; padding-bottom:110px; }
+.small-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:26px; padding-bottom:110px; }
 .sm { border:2px solid var(--ink); box-shadow:6px 6px 0 var(--ink); padding:24px 22px; display:flex; flex-direction:column; }
 .sm h3 { font-size:20px; font-weight:800; margin:6px 0 8px; letter-spacing:-.02em; }
 .sm p { color:var(--muted); font-size:15px; line-height:1.55; flex:1; }
@@ -137,4 +137,29 @@ header.page .scribble { position:absolute; right:40px; top:30px; width:130px; }
   .cs-head h1 { font-size:40px; }
   .stat-row { grid-template-columns:1fr; }
   .cs-body p { font-size:17px; }
+}
+
+/* SugarBuddy: feature grid, architecture and deployment story */
+.cs-wide { max-width:1120px; }
+.features { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:22px; }
+.feature { border:2px solid var(--ink); padding:18px 20px; background:#fff; }
+.feature h3 { font-size:18px; font-weight:800; margin-bottom:6px; }
+.feature p { font-size:16px; line-height:1.6; color:var(--muted); margin:0; }
+.arch { border:2px solid var(--ink); box-shadow:8px 8px 0 var(--ink); background:var(--soft); padding:24px; margin:26px 0 8px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; align-items:stretch; }
+.arch .node { background:#fff; border:2px solid var(--ink); padding:12px 14px; font-size:14px; line-height:1.45; }
+.arch .node b { display:block; font-size:16px; margin-bottom:2px; }
+.arch .node.core { background:var(--blue); color:#fff; grid-row:span 2; display:flex; flex-direction:column; justify-content:center; }
+.deploy { display:grid; grid-template-columns:1fr auto 1fr; gap:18px; align-items:center; margin:26px 0 8px; }
+.deploy .card { border:2px solid var(--ink); box-shadow:8px 8px 0 var(--ink); padding:20px 22px; background:#fff; height:100%; }
+.deploy .card.free { background:var(--blue); color:#fff; }
+.deploy .card h3 { font-size:20px; font-weight:800; margin-bottom:10px; }
+.deploy .card ul { padding-left:18px; font-size:15px; line-height:1.6; }
+.deploy .arrow { font-size:15px; font-weight:800; text-align:center; color:var(--ink); }
+.deploy .arrow span { display:block; font-size:34px; color:var(--blue); }
+@media (max-width: 860px) {
+  .features { grid-template-columns:1fr; }
+  .arch { grid-template-columns:1fr; }
+  .arch .node.core { grid-row:auto; }
+  .deploy { grid-template-columns:1fr; }
+  .deploy .arrow span { transform:rotate(90deg); }
 }
