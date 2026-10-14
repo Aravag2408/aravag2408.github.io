@@ -210,3 +210,12 @@ footer .btn.ghost { background:transparent; color:#fff; }
 .stack .tile.t2 { top:385px; right:-20px; }
 .stack .tile.t3 { top:540px; left:0; }
 @media (max-width: 860px) { .stack { height:auto; } }
+/* Hero cards: titles only */
+.stack { height:560px; }
+.stack .me { left:70px; width:300px; }
+.stack .tile { width:auto; padding:16px 22px; }
+.stack .tile b { font-size:22px; margin:0; white-space:nowrap; }
+.stack .tile.t1 { top:260px; left:-30px; }
+.stack .tile.t2 { top:350px; right:-20px; }
+.stack .tile.t3 { top:440px; left:10px; }
+@media (max-width: 860px) { .stack { height:auto; } .stack .tile b { white-space:normal; } }
