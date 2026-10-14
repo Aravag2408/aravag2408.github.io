@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AchvaLens · Arava Gendelman</title>
+<meta name="description" content="Case study: an AI scanner that helps a nonprofit catch harmful LGBTQ+ language in academic texts.">
+<meta property="og:title" content="AchvaLens · case study">
+<meta property="og:description" content="An AI scanner for Achva LGBT. Accuracy went from 63.6% to 69.8% with automated prompt optimization.">
+<meta property="og:image" content="https://aravag2408.github.io/assets/img/achvalens.png">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="../index.html">arava<span>.</span></a>
+    <div class="links"><a class="on" href="../work.html">Work</a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+  </nav>
+
+  <header class="cs-head">
+    <div>
+      <div class="meta"><span class="tag b">Case study</span><span class="tag">AI</span><span class="tag">Nonprofit client</span></div>
+      <h1>AchvaLens</h1>
+      <p class="sum">An AI scanner that helps a nonprofit catch outdated or harmful LGBTQ+ language in academic texts, before it gets published.</p>
+      <div class="actions"><a class="btn" href="https://achvalens-b7f0htgxhyc7fsbt.israelcentral-01.azurewebsites.net/" target="_blank" rel="noopener">Try the live app ↗</a><small>It may take a few seconds to wake up.</small></div>
+    </div>
+    <dl class="facts">
+      <dt>My role</dt><dd>Led the model research, set up the deployment to Azure, built document upload and the PDF and CSV reports, and wrote the accuracy benchmark.</dd>
+      <dt>Team</dt><dd>Four students, with Achva LGBT as the client</dd>
+      <dt>When</dt><dd>2026</dd>
+      <dt>Tools</dt><dd>Python, DSPy, GPT-4o on Azure OpenAI, Flask, Docker, Azure</dd>
+    </dl>
+  </header>
+
+  <div class="cs-body">
+    <section>
+      <h2>The problem</h2>
+      <p>Achva LGBT reviews academic and professional texts for language that is outdated or harmful to LGBTQ+ people. Doing it by hand is slow, and different reviewers draw the line in different places, especially between "a bit outdated" and "actually harmful".</p>
+    </section>
+
+    <section>
+      <h2>What I did</h2>
+      <div class="step"><div class="n">1</div><div><h3>Turned their guidelines into data</h3><p>We built a labeled list of 834 terms from Achva's guidelines, each marked fine, worth reconsidering, or harmful.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h3>Split one hard decision into two easier ones</h3><p>First: does this phrase need attention at all? Then, only for flagged phrases: should the writer reconsider it, or is it harmful? That is how a human reviewer thinks, and it made each step easier to check.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h3>Let the computer tune the instructions</h3><p>Instead of rewriting the AI's instructions by hand, I used an automated optimizer that tries many versions and keeps the ones that make fewer mistakes on the labeled terms.</p></div></div>
+      <div class="step"><div class="n">4</div><div><h3>Made it something people can use</h3><p>A scanner where you paste text or upload a PDF or Word file, a downloadable audit report, and a reviewer dashboard where new terms get approved and fed back into the model.</p></div></div>
+    </section>
+
+    <section>
+      <h2>The result</h2>
+      <div class="stat-row">
+        <div><b>63.6% → 69.8%</b><span>overall accuracy on 162 test terms</span></div>
+        <div><b>0.52 → 0.67</b><span>F1 score for spotting harmful terms</span></div>
+        <div><b>81%</b><span>accuracy on "needs attention or not"</span></div>
+      </div>
+      <img class="figure" src="../assets/img/achvalens.png" alt="The AchvaLens scanner workspace">
+      <p class="caption">The scanner: paste a text, get every relevant phrase marked green, yellow or red.</p>
+    </section>
+
+    <section>
+      <h2>What I'd do next</h2>
+      <p>The middle category, "worth reconsidering", is still the weakest. When I looked closer, the source list had 249 cases where the same word root got different labels. Cleaning that up would probably help more than any further tuning of the model.</p>
+    </section>
+  </div>
+
+  <div class="next-cs"><a class="t" href="mercury.html">Next: Mercury <span>→</span></a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+</div>
+
+<footer>
+  <div class="wrap"><h2>Let's talk<span>.</span></h2><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+</footer>
+</body>
+</html>

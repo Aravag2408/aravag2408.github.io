@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mercury · Arava Gendelman</title>
+<meta name="description" content="Case study: a privacy audit showing how a medical chatbot could leak one patient's details to another.">
+<meta property="og:title" content="Mercury · case study">
+<meta property="og:description" content="18 of 20 test patients' private details reached the chatbot's AI, and 6 showed up in another user's answer. Here is why, and how to fix it.">
+<meta property="og:image" content="https://aravag2408.github.io/assets/img/og.png">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="../index.html">arava<span>.</span></a>
+    <div class="links"><a class="on" href="../work.html">Work</a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+  </nav>
+
+  <header class="cs-head">
+    <div>
+      <div class="meta"><span class="tag b">Case study</span><span class="tag">Privacy</span><span class="tag">Risk audit</span></div>
+      <h1>Mercury</h1>
+      <p class="sum">A privacy audit of a medical chatbot. I showed that a stranger's private health details could end up in your answer, just by asking a similar question.</p>
+      <div class="actions"><a class="btn" href="https://mercury-audit.onrender.com/" target="_blank" rel="noopener">See the live demo ↗</a><a class="t" href="https://github.com/Aravag2408/mercury-audit" target="_blank" rel="noopener">Code ↗</a><small>The demo may take a few seconds to wake up.</small></div>
+    </div>
+    <dl class="facts">
+      <dt>My role</dt><dd>All of it: built the test version of the chatbot and the attack scripts, ran the audit, wrote up the findings and fixes, and deployed the live demo.</dd>
+      <dt>Context</dt><dd>Responsible AI course at the Technion; I did the work myself</dd>
+      <dt>When</dt><dd>2026</dd>
+      <dt>Tools</dt><dd>Python, a Next.js chatbot, retrieval-augmented generation (RAG), Groq and OpenRouter models, Render</dd>
+    </dl>
+  </header>
+
+  <div class="cs-body">
+    <section>
+      <h2>The problem</h2>
+      <p>To sound more personal, some medical chatbots "remember" earlier conversations and use them as background when answering. Users assume what they share stays theirs. I asked a simple question: can one user's private details reach another user?</p>
+    </section>
+
+    <section>
+      <h2>What I did</h2>
+      <div class="step"><div class="n">1</div><div><h3>Set up a realistic chatbot</h3><p>A sexual-health chatbot with login, where every conversation is stored in a shared memory the AI draws on.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h3>Created 20 fictional patients</h3><p>Each with a realistic and sensitive story: name, age, job, where they live, what they were worried about. All invented, no real people.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h3>Played the attacker</h3><p>From a separate account, I asked 20 ordinary questions, the kind any worried user would ask, and measured what came back at two levels: what reached the AI, and what it actually said.</p></div></div>
+      <div class="step"><div class="n">4</div><div><h3>Found the cause and the fixes</h3><p>Traced the leak to a single missing check, then mapped each fix to the privacy principle it serves.</p></div></div>
+    </section>
+
+    <section>
+      <h2>What I found</h2>
+      <div class="stat-row">
+        <div><b>20 / 20</b><span>questions pulled in other users' conversations</span></div>
+        <div><b>18 / 20</b><span>patients' details reached the AI</span></div>
+        <div><b>6 / 20</b><span>patients' details showed up in the reply</span></div>
+      </div>
+      <p>It also got worse over time. When a reply contained someone's details, that reply was saved to memory too, so the same person could leak again in a completely different conversation.</p>
+      <p>The cause: the search over past conversations never checked whose conversation it was. Fixing that is one line, but it is not enough on its own, so I recommended four layers:</p>
+      <p><b>1.</b> Only search the user's own history. <b>2.</b> Remove names and identifying details before storing anything (GDPR data minimisation and privacy by design). <b>3.</b> Only store conversations users actively agreed to share, with the right to delete them (GDPR consent and erasure; Israeli Privacy Protection Law). <b>4.</b> Scan replies for other people's details before sending them.</p>
+      
+    </section>
+
+    <section>
+      <h2>What I'd do next</h2>
+      <p>Next I'd rerun the same 20 questions after each fix, to measure how much still leaks. Until a fix is tested that way, there's no proof it works.</p>
+    </section>
+  </div>
+
+  <div class="next-cs"><a class="t" href="state-not-trait.html">Next: State, Not Trait <span>→</span></a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+</div>
+
+<footer>
+  <div class="wrap"><h2>Let's talk<span>.</span></h2><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+</footer>
+</body>
+</html>

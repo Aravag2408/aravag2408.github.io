@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work · Arava Gendelman</title>
+<meta name="description" content="Projects by Arava Gendelman: an AI scanner for a nonprofit, a chatbot privacy audit, research on how people decide, and more.">
+<meta property="og:title" content="Work · Arava Gendelman">
+<meta property="og:description" content="Things I've built and investigated. Each one started with a problem someone actually had.">
+<meta property="og:image" content="https://aravag2408.github.io/assets/img/og.png">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="index.html">arava<span>.</span></a>
+    <div class="links"><a class="on" href="work.html">Work</a><a class="btn" href="assets/cv.pdf" download>Download CV</a></div>
+  </nav>
+
+  <header class="page">
+    <svg class="scribble" viewBox="0 0 120 120" aria-hidden="true"><path d="M70 20 C 20 10, 10 80, 55 95 C 100 110, 115 50, 80 35 C 55 25, 40 60, 62 70" stroke="#2f5bff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+    <h1>Work<span>.</span></h1>
+    <p>Things I've built and investigated. Each one started with a problem someone actually had.</p>
+  </header>
+
+  <section class="project">
+    <div class="visual"><img src="assets/img/achvalens.png" alt="The AchvaLens scanner, where a user pastes a text to check its LGBTQ+ terminology"></div>
+    <div>
+      <div class="meta"><span class="tag b">Case study</span><span class="tag">AI</span><span class="tag">Nonprofit client</span><span class="tag">Team</span></div>
+      <h2>AchvaLens</h2>
+      <p>Built for Achva LGBT. You paste in an academic text and it marks LGBTQ+ terminology as fine, worth reconsidering, or harmful. The middle category was the hardest. Automated prompt optimization raised overall accuracy.</p>
+      <div class="num"><b>63.6% → 69.8%</b> overall accuracy</div>
+      <div class="actions"><a class="btn" href="work/achvalens.html">Read the case study</a><a class="t" href="https://achvalens-b7f0htgxhyc7fsbt.israelcentral-01.azurewebsites.net/" target="_blank" rel="noopener">Live app ↗</a><small>The live app may take a few seconds to wake up.</small></div>
+    </div>
+  </section>
+
+  <section class="project flip">
+    <div class="visual"><div class="funnel" role="img" aria-label="Audit results: 20 of 20 questions pulled in other users' conversations, 18 of 20 test patients' details reached the AI, 6 of 20 showed up in a reply.">
+      <div class="f-row"><div class="f-bar" style="width:100%"></div><b>20 / 20</b><span>questions pulled in other users' conversations</span></div>
+      <div class="f-row"><div class="f-bar" style="width:90%"></div><b>18 / 20</b><span>test patients' details reached the AI</span></div>
+      <div class="f-row"><div class="f-bar" style="width:30%"></div><b>6 / 20</b><span>showed up in another user's reply</span></div>
+    </div></div>
+    <div>
+      <div class="meta"><span class="tag b">Case study</span><span class="tag">Privacy</span><span class="tag">Risk audit</span><span class="tag">Solo</span></div>
+      <h2>Mercury</h2>
+      <p>A privacy audit of a medical chatbot. A stranger's private health details could end up in your answer, just by asking a similar question. I traced it to one missing check and mapped the fixes to GDPR.</p>
+      <div class="num"><b>18 of 20</b> patients' details reached the model</div>
+      <div class="actions"><a class="btn" href="work/mercury.html">Read the case study</a><a class="t" href="https://mercury-audit.onrender.com/" target="_blank" rel="noopener">Live demo ↗</a><small>The live demo may take a few seconds to wake up.</small></div>
+    </div>
+  </section>
+
+  <section class="project">
+    <div class="visual"><img class="fit" src="assets/img/decisions.png" alt="Grid of 42 participants by 12 decisions, colored by reasoning type: almost every row mixes several colors"></div>
+    <div>
+      <div class="meta"><span class="tag b">Case study</span><span class="tag">Research</span><span class="tag">Statistics</span></div>
+      <h2>State, Not Trait</h2>
+      <p>Do people hold steady values, or does it depend on how you ask? I analyzed 42 players of a democracy simulation game. It depends. I also built an AI grader for 480 written answers that agreed with two experts about as well as they agreed with each other.</p>
+      <div class="num"><b>480</b> answers graded and validated</div>
+      <div class="actions"><a class="btn" href="work/state-not-trait.html">Read the case study</a></div>
+    </div>
+  </section>
+
+  <div class="more-h"><h2>More projects</h2><p>Shorter stories.</p></div>
+  <div class="small-grid">
+    <div class="sm">
+      <div class="meta"><span class="tag">Health</span><span class="tag">Team</span></div>
+      <h3>SugarBuddy</h3>
+      <p>A family app for teens with Type 1 diabetes: glucose alerts, an AI that helps figure out what happened, and a community.</p>
+      <div class="note">No budget for Azure, so I re-built the deployment to run for free.</div>
+      <div class="sm-links"><a href="https://sugarbuddy.netlify.app" target="_blank" rel="noopener">Try it ↗</a></div>
+    </div>
+    <div class="sm">
+      <div class="meta"><span class="tag">AI agent</span><span class="tag">Team</span></div>
+      <h3>SugarBuddy Agent</h3>
+      <p>When a glucose reading looks wrong, the agent asks the teen a few questions and gives the parent a calm summary instead of an alarm.</p>
+      <div class="sm-links"><a href="https://suger-buddy-agent.vercel.app" target="_blank" rel="noopener">Live demo ↗</a><a href="https://github.com/Aravag2408/SugerBuddy_Agent" target="_blank" rel="noopener">Code ↗</a></div>
+    </div>
+    <div class="sm">
+      <div class="meta"><span class="tag">Education</span><span class="tag">Hackathon</span></div>
+      <h3>Between the Lines</h3>
+      <p>A hackathon project with The Israeli Center for Educational Innovation. I helped define the problem and the solution with the partner, then built the app. It raises teachers' motivation through recognition and clear expectations, together with their coaches.</p>
+      <div class="sm-links"><a href="https://canva.link/tpksz03aqaskej8" target="_blank" rel="noopener">Pitch deck ↗</a><a href="https://teach-between-lines.base44.app" target="_blank" rel="noopener">App (login required) ↗</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap"><h2>Let's talk<span>.</span></h2><a class="btn" href="assets/cv.pdf" download>Download CV</a></div>
+</footer>
+</body>
+</html>

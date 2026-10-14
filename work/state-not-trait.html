@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>State, Not Trait · Arava Gendelman</title>
+<meta name="description" content="Case study: research on whether people's justice values are stable, or depend on how and when you ask.">
+<meta property="og:title" content="State, Not Trait · case study">
+<meta property="og:description" content="42 players, 12 decisions each, 480 written answers graded by a validated AI. Values turned out to depend on context.">
+<meta property="og:image" content="https://aravag2408.github.io/assets/img/og.png">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="../index.html">arava<span>.</span></a>
+    <div class="links"><a class="on" href="../work.html">Work</a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+  </nav>
+
+  <header class="cs-head">
+    <div>
+      <div class="meta"><span class="tag b">Case study</span><span class="tag">Research</span><span class="tag">Statistics</span></div>
+      <h1>State, Not Trait</h1>
+      <p class="sum">Do people hold steady values, or does it depend on how and when you ask? An analysis of players in a democracy simulation game.</p>
+    </div>
+    <dl class="facts">
+      <dt>My role</dt><dd>All of the analysis: the AI grader and its validation, the statistics, and the conclusions. The data was collected by the research team.</dd>
+      <dt>Team</dt><dd>Research team, Technion and Bar-Ilan University</dd>
+      <dt>When</dt><dd>2026</dd>
+      <dt>Tools</dt><dd>Python, pandas, statsmodels, scikit-learn, an LLM API</dd>
+    </dl>
+  </header>
+
+  <div class="cs-body">
+    <section>
+      <h2>The problem</h2>
+      <p>In a democracy simulation game, 42 participants faced dilemmas in two fictional worlds, 1950 and 2050. Each dilemma was asked three ways: a quick multiple-choice click, a written explanation, and a response under pressure. The research question: is someone's sense of justice a stable trait, or a state that shifts with the situation?</p>
+      <p>There was a practical problem too. 480 written answers had to be scored on two scales, and coding them all by hand was not realistic.</p>
+    </section>
+
+    <section>
+      <h2>What I did</h2>
+      <div class="step"><div class="n">1</div><div><h3>Built an AI grader and checked it against experts</h3><p>Two human experts scored a 10% sample. I measured how much they agreed with each other, and set that as the bar the AI had to reach.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h3>Compared a few setups</h3><p>I tried several instruction styles and models against the expert-scored answers and report the best one on each scale. The expert answers were never used to write the instructions themselves.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h3>Looked at consistency from every angle</h3><p>Within a person across decisions, across the two worlds, between the click and the written answer, between what people said in a survey and what they did in the game, and whether people fall into clear types at all.</p></div></div>
+    </section>
+
+    <section>
+      <h2>What I found</h2>
+      <div class="stat-row">
+        <div><b>0.700 vs 0.707</b><span>agreement score (0 to 1) on justice orientation: best AI setup vs the experts with each other</span></div>
+        <div><b>0 of 42</b><span>participants were consistent enough to look like a fixed trait</span></div>
+        <div><b>28.7%</b><span>of the time, the click and the written answer agreed</span></div>
+      </div>
+      <p>On the second scale, argument quality, the best setup reached 0.569 against the experts' 0.555. On each scale, the best AI setup agreed with the experts about as well as they agreed with each other.</p>
+      <img class="figure" src="../assets/img/state-not-trait.png" alt="Bar chart: on both scales the best AI grader agrees with the experts about as much as the experts agree with each other">
+      <p class="caption">White: how much the two experts agreed with each other. Blue: the best AI setup's agreement with them.</p>
+      <p>The behavior side was just as clear. A person's choices in 1950 barely predicted their choices in 2050, what people said in the survey had almost no relation to what they did, and the pressure round pushed people toward outcome-focused answers. Justice orientation shifted with the situation instead of staying fixed.</p>
+      <img class="figure" src="../assets/img/decisions.png" alt="Grid of 42 participants by 12 decisions, colored by reasoning type: almost every row mixes several colors">
+      <p class="caption">Every participant, every decision. If values were a fixed trait, each row would be a single color.</p>
+    </section>
+
+    <section>
+      <h2>What I'd do next</h2>
+      <p>42 people is a small group, and two expert raters is the minimum for this kind of check. A third rater and a larger sample would turn these findings from a strong signal into something I'd be comfortable calling a result.</p>
+    </section>
+  </div>
+
+  <div class="next-cs"><a class="t" href="achvalens.html">Next: AchvaLens <span>→</span></a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+</div>
+
+<footer>
+  <div class="wrap"><h2>Let's talk<span>.</span></h2><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+</footer>
+</body>
+</html>
