@@ -29,7 +29,7 @@
     </div>
     <dl class="facts">
       <dt>My role</dt><dd>Most of the build: 417 of the team's 532 commits, across the backend, the app, the AI agent and the tests. I also ran the deployment, first on Azure and then on a free setup I moved it to myself.</dd>
-      <dt>Team</dt><dd>Four students, Technion</dd>
+      <dt>Team</dt><dd>Four students, Software Engineering for ML course, Technion</dd>
       <dt>When</dt><dd>2026</dd>
       <dt>Tools</dt><dd>Python, FastAPI, MongoDB, React Native (Expo), WebSockets, Docker, GitHub Actions, Azure, Netlify, OpenRouter</dd>
       <dt>Code</dt><dd>Private</dd>
@@ -65,6 +65,19 @@
     </section>
 
     <section>
+      <h2>Making it safe and solid</h2>
+      <p>A health app for teenagers can't just work on a good day. A lot of the effort went into what happens when things go wrong.</p>
+      <div class="features">
+        <div class="feature"><h3>Guardrails on the AI</h3><p>Teen-written text is screened for tricks like "ignore your instructions" in English and Hebrew (over 20 tested cases). The AI is never allowed to tell anyone how much insulin to take, and anything life-threatening always reaches the parent, even if the teen asks to hide it.</p></div>
+        <div class="feature"><h3>Fails safe, never shows nonsense</h3><p>Every AI answer is checked. If it's in the wrong language or unsafe, the app retries once and then shows nothing rather than something wrong.</p></div>
+        <div class="feature"><h3>About 735 automated tests</h3><p>Covering single functions, whole user journeys, security (including attacks on the AI) and heavy load. They run on every change.</p></div>
+        <div class="feature"><h3>Deploys that undo themselves</h3><p>A new version goes live only after the tests pass, and if it doesn't come up healthy, the pipeline rolls back to the last working version on its own.</p></div>
+        <div class="feature"><h3>A bug that froze everyone</h3><p>I found that one slow AI call could freeze the whole app for every user at once. I fixed it so calls run side by side, and added a test that proves it.</p></div>
+        <div class="feature"><h3>Privacy by design</h3><p>No real patient data. Passwords are hashed, sensor tokens are encrypted, and the demo runs on a simulated glucose feed instead of a real child's data.</p></div>
+      </div>
+    </section>
+
+    <section>
       <h2>Inside the app</h2>
       <p>Screens from the live app (in Hebrew), recorded with demo families.</p>
       <div class="gallery">
@@ -84,8 +97,8 @@
           <h3>Version 1: Azure</h3>
           <ul>
             <li>Everything on one Azure virtual machine</li>
-            <li>Docker containers, deployed automatically with GitHub Actions</li>
-            <li>Small AI models running on the same machine</li>
+            <li>Docker containers, deployed automatically with GitHub Actions; a bad version rolls back by itself</li>
+            <li>Small AI models running on the same machine, which struggled with Hebrew</li>
             <li>Live only while the paid machine was on</li>
           </ul>
         </div>
@@ -96,6 +109,7 @@
             <li>The app on Netlify</li>
             <li>The backend on a free cloud server with a free web address</li>
             <li>The AI through OpenRouter's free models, which are much larger than the ones before</li>
+            <li>Bigger models also fixed the app's weakest spot: the small model's broken Hebrew</li>
             <li>$0 a month, and live all the time</li>
           </ul>
         </div>
@@ -106,7 +120,7 @@
       <h2>The result</h2>
       <div class="stat-row">
         <div><b>417 / 532</b><span>commits in the project are mine</span></div>
-        <div><b>3</b><span>kinds of users, each with their own app experience</span></div>
+        <div><b>~735</b><span>automated tests, from single functions to attacks on the AI</span></div>
         <div><b>$0</b><span>a month to keep it running, after the move</span></div>
       </div>
       <img class="figure" src="../assets/img/sugarbuddy-login.jpg" alt="The SugarBuddy sign-in screen, with the app's robot mascot and a glucose chart">
