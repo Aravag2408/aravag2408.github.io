@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SugarBuddy and Beyond · Arava Gendelman</title>
+<meta name="description" content="Case study: curating ten synthetic text-tabular datasets for an NLP course benchmark, built on SugarBuddy's check-in concept.">
+<meta property="og:title" content="SugarBuddy and Beyond · case study">
+<meta property="og:description" content="A 94-cause taxonomy, five tabular learners, and a method that generalized to nine more conditions — 5 of 10 datasets passed the benchmark's curation bar.">
+<meta property="og:image" content="https://aravag2408.github.io/assets/img/og.png">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="../index.html">arava<span>.</span></a>
+    <div class="links"><a class="on" href="../work.html">Work</a><a href="https://www.linkedin.com/in/arava-gendelman" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+  </nav>
+
+  <header class="cs-head">
+    <div>
+      <div class="meta"><span class="tag b">Case study</span><span class="tag">NLP</span><span class="tag">Benchmark data</span><span class="tag">Solo</span></div>
+      <h1>SugarBuddy and Beyond</h1>
+      <p class="sum">For an NLP course, I turned SugarBuddy's check-in concept into a synthetic benchmark dataset, then generalized the method to nine more conditions.</p>
+    </div>
+    <dl class="facts">
+      <dt>My role</dt><dd>Everything solo: the taxonomy, data generation, evaluation, and a full citation check on every medical claim.</dd>
+      <dt>Course</dt><dd>NLP (097215), Technion</dd>
+      <dt>When</dt><dd>2026</dd>
+      <dt>Tools</dt><dd>Python, pandas, scikit-learn, CatBoost, LightGBM, TabPFN, LoRA fine-tuning, an LLM for text authoring</dd>
+    </dl>
+  </header>
+
+  <div class="cs-body">
+    <section>
+      <h2>The problem</h2>
+      <p>A dataset that pairs free text with structured columns is only an interesting benchmark if both parts actually matter. If a model does well just by reading the table, or just by reading the text, it isn't testing anything about combining them. MulTaBench, a benchmark from my NLP course, gives a concrete test for this: run five tabular learners under four conditions each, and a dataset only counts as genuine text-tabular if a joint model beats both single-modality baselines, and fine-tuning the text encoder on the target beats a frozen one — for at least 3 of the 5 learners.</p>
+      <p>The assignment was to curate one dataset that passes. I built ten.</p>
+    </section>
+
+    <section>
+      <h2>What I did</h2>
+      <div class="step"><div class="n">1</div><div><h3>Built SugarBuddy as a synthetic dataset</h3><p>Modeled on my own SugarBuddy app's check-in flow: a 94-cause taxonomy of glucose anomalies grounded in diabetes literature, structured CGM/check-in features that hint at the cause without giving it away, and a free-text note authored at one of four calibrated difficulty tiers.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h3>Audited the text with a cheap probe</h3><p>A TF-IDF + logistic-regression classifier tries to guess the cause from the note alone. It caught a tier that was accidentally too predictable; I rewrote the leaking rows and re-verified it fell back to near-chance accuracy.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h3>Generalized it into a reusable template</h3><p>Taxonomy → noisy structured profile → a cheap pre-text signal check → tiered free-text → the same probe audit. I validated it on nine more pediatric conditions (migraine, lupus, DKA, anaphylaxis, and others), each re-evaluated at 3 folds instead of a single-fold spot check.</p></div></div>
+      <div class="step"><div class="n">4</div><div><h3>Checked every medical claim before submitting</h3><p>The taxonomies cite 145 pieces of medical literature. I verified each one individually against the actual paper — found 13 that were overstated, mis-sourced, or unconfirmable, and fixed every one before submission.</p></div></div>
+    </section>
+
+    <section>
+      <h2>What I found</h2>
+      <div class="stat-row">
+        <div><b>5 / 5</b><span>learners passed cleanly for SugarBuddy, the main dataset, well past the 3/5 bar</span></div>
+        <div><b>5 of 10</b><span>datasets passed the benchmark's full curation criteria</span></div>
+        <div><b>145</b><span>literature citations checked individually before submission</span></div>
+      </div>
+      <p>The failures were as informative as the passes. Two datasets bracketed a U-shaped relationship between a dataset's structured-only signal and whether it passes: one with too strong a structured signal saturated the joint model, leaving fine-tuning nothing to add; one too weak failed the basic combined-signal test outright. A fine-tuning-capacity fix discovered on a failing pilot — reducing how much the text encoder was allowed to adapt — turned out to be exactly what was needed to rescue the one weak learner in SugarBuddy itself, the dataset the whole method was built to pass.</p>
+    </section>
+
+    <section>
+      <h2>What I'd do next</h2>
+      <p>Right now every row has a definite cause — there's no "unknown" label, even though a real agent sometimes can't attribute one confidently. I skipped it deliberately since it would dilute the curation margins, but it's the honest next step. I'd also like to try the same template on a condition that combines images with text and structured data, which the underlying benchmark supports but none of my ten datasets attempted.</p>
+    </section>
+  </div>
+
+  <div class="next-cs"><a class="t" href="sugarbuddy.html">Next: SugarBuddy <span>→</span></a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+</div>
+
+<footer>
+  <div class="wrap"><h2>Let's talk<span>.</span></h2><div class="foot-links"><a class="btn ghost" href="https://www.linkedin.com/in/arava-gendelman" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div></div>
+</footer>
+</body>
+</html>
