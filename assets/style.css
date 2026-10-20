@@ -345,3 +345,9 @@ footer .btn.ghost { background:transparent; color:#fff; }
 .tried b { font-size:17px; font-weight:800; }
 .tried span { font-size:13px; font-weight:600; color:var(--muted); text-align:right; }
 @media (max-width: 860px) { .tried { grid-template-columns:1fr; } .build h2 { font-size:28px; } }
+/* Home: Tools I've used */
+.tools { display:grid; grid-template-columns:140px 1fr; gap:14px 24px; margin-top:28px; padding-top:22px; border-top:2px solid var(--ink); align-items:baseline; }
+.tools dt { font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--blue-text); }
+.tools dd { display:flex; flex-wrap:wrap; gap:8px; }
+.tools dd span { font-size:14px; font-weight:600; border:1.5px solid var(--ink); padding:5px 11px; background:#fff; }
+@media (max-width: 860px) { .tools { grid-template-columns:1fr; gap:6px; } .tools dd { margin-bottom:12px; } }
