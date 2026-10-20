@@ -316,7 +316,8 @@ footer .btn.ghost { background:transparent; color:#fff; }
 .cs-body h2.sub { margin-top:56px; }
 @media (max-width: 860px) {
   .diagram, .chart.wide { overflow-x:auto; }
-  .diagram svg, .chart.wide svg { min-width:720px; }
+  .diagram svg { min-width:980px; }
+  .chart.wide svg { min-width:720px; }
 }
 .frame-browser + .caption { margin:14px 0 8px; }
 .chart svg text.on-blue { fill:#fff; }
@@ -332,3 +333,5 @@ footer .btn.ghost { background:transparent; color:#fff; }
 .visual.card-chart .bar { fill:var(--blue); stroke:var(--ink); stroke-width:2; }
 .visual.card-chart .bar.ghost { fill:var(--soft); }
 .visual.card-chart text.on-blue { fill:#fff; }
+.visual.card-chart .lbl { font-size:22px; }
+.visual.card-chart .muted, .visual.card-chart .eyebrow-t { font-size:21px; }

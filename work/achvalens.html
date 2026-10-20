@@ -56,7 +56,7 @@
         <div class="decision"><h3>Two easy questions instead of one hard one</h3><dl>
           <dt>Chose</dt><dd>Stage 1: does this phrase need attention at all? Stage 2, only for flagged phrases: reconsider, or harmful?</dd>
           <dt class="gave">Gave up</dt><dd>A single, simpler model call.</dd>
-          <dt>Why</dt><dd>That's how a human reviewer thinks, and it made each step measurable on its own. Stage 1 reached 81%.</dd></dl></div>
+          <dt>Why</dt><dd>That's how a human reviewer thinks, and it made each step measurable on its own. Stage 1 alone was right 81% of the time on validation.</dd></dl></div>
         <div class="decision"><h3>Let an optimizer write the instructions</h3><dl>
           <dt>Chose</dt><dd>DSPy tries many prompt versions and keeps the ones that make fewer mistakes on 834 labeled terms from Achva's guidelines.</dd>
           <dt class="gave">Gave up</dt><dd>Full control over the exact wording of the prompt.</dd>
@@ -93,9 +93,9 @@
     <section id="results">
       <div class="eyebrow-s">Results</div>
       <h2>Measured, not guessed</h2>
-      <p>On 162 held-out test terms, before and after the automated optimization:</p>
+      <p>The optimizer was steered by 162 validation terms. A separate test set of 163 terms was kept aside and run once, at the very end.</p>
       <div class="chart wide">
-        <svg viewBox="0 0 760 230" role="img" aria-label="Overall accuracy rose from 63.6% to 69.8%. F1 for spotting harmful terms rose from 0.52 to 0.67.">
+        <svg viewBox="0 0 760 230" role="img" aria-label="On the 162 validation terms, overall accuracy rose from 63.6% to 69.8%, and F1 for spotting harmful terms rose from 0.52 to 0.67.">
           <text class="lbl" x="0" y="34">Overall accuracy</text>
           <rect class="bar ghost" x="200" y="14" width="318" height="26"/><text class="val" x="528" y="34">63.6%</text>
           <rect class="bar" x="200" y="48" width="349" height="26"/><text class="val" x="559" y="68">69.8%</text>
@@ -105,12 +105,12 @@
           <line class="axis" x1="200" y1="6" x2="200" y2="196"/>
           <text class="muted" x="200" y="220">0</text><text class="muted" x="700" y="220" text-anchor="end">100% / 1.0</text>
         </svg>
-        <div class="chart-legend"><span><i style="background:var(--soft)"></i>before</span><span><i style="background:var(--blue)"></i>after optimization</span></div>
+        <div class="chart-legend"><span><i style="background:var(--soft)"></i>before</span><span><i style="background:var(--blue)"></i>after optimization</span><span>· on the 162 validation terms</span></div>
       </div>
       <div class="stat-row">
-        <div><b>+6.2 pts</b><span>overall accuracy, 63.6% → 69.8%</span></div>
-        <div><b>+0.15</b><span>F1 on harmful terms, 0.52 → 0.67</span></div>
-        <div><b>81%</b><span>accuracy on "needs attention or not"</span></div>
+        <div><b>64.4%</b><span>accuracy on the held-out test set (163 terms, run once)</span></div>
+        <div><b>0.71</b><span>F1 for spotting harmful terms, on the same test set</span></div>
+        <div><b>0.26</b><span>F1 for "reconsider": the weak spot, and the next thing to fix</span></div>
       </div>
     </section>
 
@@ -118,6 +118,7 @@
       <div class="eyebrow-s">What I'd measure next</div>
       <h2>Fix the data before the model</h2>
       <div class="next-box">
+        <p><b>What the test set says:</b> the +6.2 points on validation shrank to 64.4% on unseen terms, and harmful terms held up well (F1 0.71). The gain mostly didn't carry over to the middle category.</p>
         <p><b>The weak spot:</b> the middle category, "reconsider". In the source list I found 249 cases where the same word root got different labels. Cleaning that up would likely help more than more tuning.</p>
         <p><b>The product metric:</b> reviewer minutes saved per document, and how often reviewers override the model's label.</p>
         <p><b>How:</b> time a sample of reviews with and without the scanner, and track overrides in the dashboard.</p>
