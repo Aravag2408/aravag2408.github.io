@@ -41,6 +41,8 @@ def main(selected):
             for w, h in SIZES:
                 page = browser.new_page(viewport={"width": w, "height": h})
                 page.goto(f"http://127.0.0.1:{PORT}/{rel}", wait_until="networkidle")
+                page.evaluate("document.querySelectorAll('img[loading=lazy]').forEach(i => i.loading = 'eager')")
+                page.wait_for_load_state("networkidle")
                 sw, cw = page.evaluate("[document.documentElement.scrollWidth, document.documentElement.clientWidth]")
                 if sw > cw:
                     overflow.append(f"{rel} @ {w}: scrollWidth {sw} > {cw}")

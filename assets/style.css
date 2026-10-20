@@ -311,3 +311,10 @@ footer .btn.ghost { background:transparent; color:#fff; }
   .hero h1.head { font-size:36px; }
   .hero h1.head .hl { white-space:normal; }
 }
+.cs-head + .frame-browser { margin-bottom:24px; }
+.gallery .frame-browser img { border:0; box-shadow:none; }
+.cs-body h2.sub { margin-top:56px; }
+@media (max-width: 860px) {
+  .diagram, .chart.wide { overflow-x:auto; }
+  .diagram svg, .chart.wide svg { min-width:720px; }
+}
