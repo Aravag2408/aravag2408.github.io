@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SugarBuddy and Beyond · Arava Gendelman</title>
-<meta name="description" content="Case study: curating ten synthetic text-tabular datasets for an NLP course benchmark, built on SugarBuddy's check-in concept.">
-<meta property="og:title" content="SugarBuddy and Beyond · case study">
+<meta name="description" content="A benchmark dataset built from SugarBuddy's check-in, generalized into a template and tested on nine more conditions.">
+<meta property="og:title" content="SugarBuddy and Beyond · Arava Gendelman">
 <meta property="og:description" content="A 94-cause taxonomy, five tabular learners, and a method that generalized to nine more conditions — 5 of 10 datasets passed the benchmark's curation bar.">
 <meta property="og:image" content="https://aravag2408.github.io/assets/img/og.png">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
@@ -22,46 +22,90 @@
 
   <header class="cs-head">
     <div>
-      <div class="meta"><span class="tag b">Case study</span><span class="tag">NLP</span><span class="tag">Benchmark data</span><span class="tag">Solo</span></div>
+      <div class="meta"><span class="tag b">Data product</span><span class="tag">NLP</span><span class="tag">Benchmark data</span><span class="tag">Solo</span></div>
       <h1>SugarBuddy and Beyond</h1>
-      <p class="sum">For an NLP course, I turned SugarBuddy's check-in concept into a synthetic benchmark dataset, then generalized the method to nine more conditions.</p>
+      <p class="sum">I turned SugarBuddy's check-in into a benchmark dataset that pairs sensor-style data with a teen's free-text note, then made the method a reusable template and ran it on nine more pediatric conditions.</p>
+      <div class="actions"><small>The code and paper are private.</small></div>
     </div>
     <dl class="facts">
-      <dt>My role</dt><dd>Everything solo: the taxonomy, data generation, evaluation, and a full citation check on every medical claim.</dd>
+      <dt>My role</dt><dd>Everything, solo: the taxonomy, data generation, evaluation, and a check of every medical citation.</dd>
       <dt>Course</dt><dd>NLP (097215), Technion</dd>
       <dt>When</dt><dd>2026</dd>
-      <dt>Tools</dt><dd>Python, pandas, scikit-learn, CatBoost, LightGBM, TabPFN, LoRA fine-tuning, an LLM for text authoring</dd>
+      <dt>Stack</dt><dd>Python, pandas, scikit-learn, CatBoost, LightGBM, TabPFN, LoRA fine-tuning, an LLM for writing the notes</dd>
     </dl>
   </header>
 
-  <div class="cs-body">
-    <section>
-      <h2>The problem</h2>
-      <p>A dataset that pairs free text with structured columns is only an interesting benchmark if both parts actually matter. If a model does well just by reading the table, or just by reading the text, it isn't testing anything about combining them. MulTaBench, a benchmark from my NLP course, gives a concrete test for this: run five tabular learners under four conditions each, and a dataset only counts as genuine text-tabular if a joint model beats both single-modality baselines, and fine-tuning the text encoder on the target beats a frozen one — for at least 3 of the 5 learners.</p>
-      <p>The assignment was to curate one dataset that passes. I built ten.</p>
+  <div class="cs-body cs-wide">
+    <section id="users">
+      <div class="eyebrow-s">Who it's for</div>
+      <h2>Researchers who need data where text and numbers both matter</h2>
+      <p class="lead">Models that read a table and free text together need test data where both parts really carry signal. If a model can win by reading only the table, or only the text, the dataset isn't testing anything.</p>
+      <p>MulTaBench, the benchmark from my NLP course, makes that a hard rule: five tabular learners, four conditions each. A dataset counts only if the joint model beats both single-source baselines, and fine-tuning the text encoder beats a frozen one, for at least 3 of the 5 learners. The assignment was to build one dataset that passes. I built ten.</p>
     </section>
 
-    <section>
-      <h2>What I did</h2>
-      <div class="step"><div class="n">1</div><div><h3>Built SugarBuddy as a synthetic dataset</h3><p>Modeled on my own SugarBuddy app's check-in flow: a 94-cause taxonomy of glucose anomalies grounded in diabetes literature, structured CGM/check-in features that hint at the cause without giving it away, and a free-text note authored at one of four calibrated difficulty tiers.</p></div></div>
-      <div class="step"><div class="n">2</div><div><h3>Audited the text with a cheap probe</h3><p>A TF-IDF + logistic-regression classifier tries to guess the cause from the note alone. It caught a tier that was accidentally too predictable; I rewrote the leaking rows and re-verified it fell back to near-chance accuracy.</p></div></div>
-      <div class="step"><div class="n">3</div><div><h3>Generalized it into a reusable template</h3><p>Taxonomy → noisy structured profile → a cheap pre-text signal check → tiered free-text → the same probe audit. I validated it on nine more pediatric conditions (migraine, lupus, DKA, anaphylaxis, and others), each re-evaluated at 3 folds instead of a single-fold spot check.</p></div></div>
-      <div class="step"><div class="n">4</div><div><h3>Checked every medical claim before submitting</h3><p>The taxonomies cite 145 pieces of medical literature. I verified each one individually against the actual paper — found 13 that were overstated, mis-sourced, or unconfirmable, and fixed every one before submission.</p></div></div>
-    </section>
-
-    <section>
-      <h2>What I found</h2>
-      <div class="stat-row">
-        <div><b>5 / 5</b><span>learners passed cleanly for SugarBuddy, the main dataset, well past the 3/5 bar</span></div>
-        <div><b>5 of 10</b><span>datasets passed the benchmark's full curation criteria</span></div>
-        <div><b>145</b><span>literature citations checked individually before submission</span></div>
+    <section id="decisions">
+      <div class="eyebrow-s">Key decisions</div>
+      <h2>What I chose, and what it cost</h2>
+      <div class="decisions">
+        <div class="decision"><h3>Synthetic, but grounded in the literature</h3><dl>
+          <dt>Chose</dt><dd>Generated data built on a 94-cause taxonomy of glucose anomalies, each cause backed by diabetes research.</dd>
+          <dt class="gave">Gave up</dt><dd>The realism of real patient records.</dd>
+          <dt>Why</dt><dd>Real data about minors isn't available or appropriate. Grounding every cause in research keeps the synthetic data honest.</dd></dl></div>
+        <div class="decision"><h3>Audit the text with a cheap probe</h3><dl>
+          <dt>Chose</dt><dd>A simple TF-IDF classifier tries to guess the cause from the note alone. If it can, the note gives the answer away.</dd>
+          <dt class="gave">Gave up</dt><dd>Some speed: rows that leaked had to be rewritten and re-checked.</dd>
+          <dt>Why</dt><dd>It caught one difficulty tier that was accidentally too easy. Without the probe, the dataset would have passed for the wrong reason.</dd></dl></div>
+        <div class="decision"><h3>A template, not a one-off</h3><dl>
+          <dt>Chose</dt><dd>Turned the method into steps anyone can repeat, and tested it on nine more conditions, each at 3 folds.</dd>
+          <dt class="gave">Gave up</dt><dd>Time I could have spent polishing a single dataset.</dd>
+          <dt>Why</dt><dd>One passing dataset could be luck. Ten show whether the method works, and where it breaks.</dd></dl></div>
       </div>
-      <p>The failures were as informative as the passes. Two datasets bracketed a U-shaped relationship between a dataset's structured-only signal and whether it passes: one with too strong a structured signal saturated the joint model, leaving fine-tuning nothing to add; one too weak failed the basic combined-signal test outright. A fine-tuning-capacity fix discovered on a failing pilot — reducing how much the text encoder was allowed to adapt — turned out to be exactly what was needed to rescue the one weak learner in SugarBuddy itself, the dataset the whole method was built to pass.</p>
     </section>
 
-    <section>
-      <h2>What I'd do next</h2>
-      <p>Right now every row has a definite cause — there's no "unknown" label, even though a real agent sometimes can't attribute one confidently. I skipped it deliberately since it would dilute the curation margins, but it's the honest next step. I'd also like to try the same template on a condition that combines images with text and structured data, which the underlying benchmark supports but none of my ten datasets attempted.</p>
+    <section id="under-the-hood">
+      <div class="eyebrow-s">Under the hood</div>
+      <h2>The template</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 980 120" role="img" aria-label="The template: a cause taxonomy, then a noisy structured profile, a signal check before any text, tiered free-text notes, a probe audit for leaks, and finally the MulTaBench evaluation.">
+          <rect class="box" x="4" y="24" width="150" height="72"/><text class="title" x="79" y="54" text-anchor="middle">Taxonomy</text><text class="muted" x="79" y="76" text-anchor="middle">causes + citations</text>
+          <rect class="box" x="168" y="24" width="150" height="72"/><text class="title" x="243" y="54" text-anchor="middle">Structured</text><text class="muted" x="243" y="76" text-anchor="middle">noisy, hints only</text>
+          <rect class="box" x="332" y="24" width="150" height="72"/><text class="title" x="407" y="54" text-anchor="middle">Signal check</text><text class="muted" x="407" y="76" text-anchor="middle">before any text</text>
+          <rect class="box core" x="496" y="24" width="150" height="72"/><text class="title on-blue" x="571" y="54" text-anchor="middle">Free-text note</text><text class="on-blue" x="571" y="76" text-anchor="middle" font-size="12" font-weight="600">4 difficulty tiers</text>
+          <rect class="box" x="660" y="24" width="150" height="72"/><text class="title" x="735" y="54" text-anchor="middle">Probe audit</text><text class="muted" x="735" y="76" text-anchor="middle">does text leak?</text>
+          <rect class="box" x="824" y="24" width="150" height="72"/><text class="title" x="899" y="54" text-anchor="middle">MulTaBench</text><text class="muted" x="899" y="76" text-anchor="middle">5 learners × 4</text>
+          <path class="edge" d="M154 60 H168 M318 60 H332 M482 60 H496 M646 60 H660 M810 60 H824"/>
+        </svg>
+      </div>
+      <p>Every medical claim matters here. The taxonomies cite 145 papers, and I checked each one against the source. 13 were overstated, mis-sourced or couldn't be confirmed, and I fixed every one before submitting.</p>
+    </section>
+
+    <section id="results">
+      <div class="eyebrow-s">Results</div>
+      <h2>Ten datasets, five passed the full bar</h2>
+      <div class="chart wide">
+        <svg viewBox="0 0 760 150" role="img" aria-label="Ten datasets built: SugarBuddy plus nine more conditions. Five passed the benchmark's full curation criteria, SugarBuddy among them.">
+          <rect class="bar" x="0" y="20" width="64" height="64"/><rect class="bar" x="76" y="20" width="64" height="64"/><rect class="bar" x="152" y="20" width="64" height="64"/><rect class="bar" x="228" y="20" width="64" height="64"/><rect class="bar" x="304" y="20" width="64" height="64"/>
+          <rect class="bar ghost" x="380" y="20" width="64" height="64"/><rect class="bar ghost" x="456" y="20" width="64" height="64"/><rect class="bar ghost" x="532" y="20" width="64" height="64"/><rect class="bar ghost" x="608" y="20" width="64" height="64"/><rect class="bar ghost" x="684" y="20" width="64" height="64"/>
+          <text class="val on-blue" x="32" y="58" text-anchor="middle">SB</text>
+          <text class="lbl" x="0" y="116">passed the full curation criteria</text><text class="lbl" x="380" y="116">fell short, and showed why</text>
+          <text class="muted" x="0" y="140">SB = SugarBuddy, the main dataset: 5 of 5 learners passed</text>
+        </svg>
+      </div>
+      <div class="stat-row">
+        <div><b>5 / 5</b><span>learners passed on SugarBuddy, well past the 3-of-5 bar</span></div>
+        <div><b>94</b><span>causes in the glucose taxonomy, each grounded in research</span></div>
+        <div><b>145 / 145</b><span>citations checked one by one; 13 fixed</span></div>
+      </div>
+      <p>The failures taught as much as the passes. Two datasets bracketed a U-shape: with too much signal in the table, the joint model saturates and fine-tuning has nothing to add; with too little, it fails the basic combined test. A fix found on a failing pilot, limiting how much the text encoder may adapt, later rescued the one weak learner in SugarBuddy itself.</p>
+    </section>
+
+    <section id="next">
+      <div class="eyebrow-s">What I'd do next</div>
+      <h2>Make it more like the real world</h2>
+      <div class="next-box">
+        <p><b>An "unknown" label:</b> every row has a definite cause today, but a real agent sometimes can't tell. I left it out on purpose to protect the margins; it's the honest next step.</p>
+        <p><b>Images too:</b> the benchmark supports images alongside text and tables, and none of my ten datasets tried it yet.</p>
+      </div>
     </section>
   </div>
 

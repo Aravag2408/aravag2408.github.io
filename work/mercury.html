@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mercury · Arava Gendelman</title>
-<meta name="description" content="Case study: a privacy audit showing how a medical chatbot could leak one patient's details to another.">
-<meta property="og:title" content="Mercury · case study">
+<meta name="description" content="A privacy audit of a RAG medical chatbot: 18 of 20 fictional patients' details reached the AI.">
+<meta property="og:title" content="Mercury · Arava Gendelman">
 <meta property="og:description" content="18 of 20 test patients' private details reached the chatbot's AI, and 6 showed up in another user's answer. Here is why, and how to fix it.">
 <meta property="og:image" content="https://aravag2408.github.io/assets/img/og.png">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
@@ -22,53 +22,104 @@
 
   <header class="cs-head">
     <div>
-      <div class="meta"><span class="tag b">Case study</span><span class="tag">Privacy</span><span class="tag">Risk audit</span></div>
+      <div class="meta"><span class="tag b">Risk audit</span><span class="tag">RAG</span><span class="tag">Privacy</span><span class="tag">Solo</span></div>
       <h1>Mercury</h1>
-      <p class="sum">A privacy audit of a medical chatbot. I showed that a stranger's private health details could end up in your answer, just by asking a similar question.</p>
+      <p class="sum">A privacy audit of a RAG medical chatbot. By asking ordinary questions from a second account, I showed that strangers' private health details reach the AI, and sometimes the answer you get.</p>
       <div class="actions"><a class="btn" href="https://mercury-audit.onrender.com/" target="_blank" rel="noopener">See the live demo ↗</a><a class="t" href="https://github.com/Aravag2408/mercury-audit" target="_blank" rel="noopener">Code ↗</a><small>The demo may take a few seconds to wake up.</small></div>
     </div>
     <dl class="facts">
-      <dt>My role</dt><dd>All of it: built the test version of the chatbot and the attack scripts, ran the audit, wrote up the findings and fixes, and deployed the live demo.</dd>
-      <dt>Context</dt><dd>Responsible AI course at the Technion; I did the work myself</dd>
+      <dt>My role</dt><dd>All of it: set up the chatbot for testing, wrote the attack scripts, ran the audit, wrote up the findings and fixes, and deployed the live demo.</dd>
+      <dt>Context</dt><dd>Responsible AI, Law, Ethics &amp; Society course, Technion</dd>
       <dt>When</dt><dd>2026</dd>
-      <dt>Tools</dt><dd>Python, a Next.js chatbot, retrieval-augmented generation (RAG), Groq and OpenRouter models, Render</dd>
+      <dt>Stack</dt><dd>Python, a Next.js chatbot, retrieval-augmented generation (RAG), Groq and OpenRouter models, Render</dd>
     </dl>
   </header>
 
-  <div class="cs-body">
-    <section>
-      <h2>The problem</h2>
-      <p>To sound more personal, some medical chatbots "remember" earlier conversations and use them as background when answering. Users assume what they share stays theirs. I asked a simple question: can one user's private details reach another user?</p>
-    </section>
+  <div class="frame-browser"><img src="../assets/img/mercury-home.webp" alt="Mercury's home screen: 'Your sexual health questions, answered', a question box, suggested questions, and a promise of private, CDC and WHO-backed guidance"></div>
+  <p class="caption">The chatbot I audited promises "private &amp; confidential" answers.</p>
 
-    <section>
-      <h2>What I did</h2>
-      <div class="step"><div class="n">1</div><div><h3>Set up a realistic chatbot</h3><p>A sexual-health chatbot with login, where every conversation is stored in a shared memory the AI draws on.</p></div></div>
-      <div class="step"><div class="n">2</div><div><h3>Created 20 fictional patients</h3><p>Each with a realistic and sensitive story: name, age, job, where they live, what they were worried about. All invented, no real people.</p></div></div>
-      <div class="step"><div class="n">3</div><div><h3>Played the attacker</h3><p>From a separate account, I asked 20 ordinary questions, the kind any worried user would ask, and measured what came back at two levels: what reached the AI, and what it actually said.</p></div></div>
-      <div class="step"><div class="n">4</div><div><h3>Found the cause and the fixes</h3><p>Traced the leak to a single missing check, then mapped each fix to the privacy principle it serves.</p></div></div>
-    </section>
-
-    <section>
-      <h2>What I found</h2>
-      <div class="stat-row">
-        <div><b>20 / 20</b><span>questions pulled in other users' conversations</span></div>
-        <div><b>18 / 20</b><span>patients' details reached the AI</span></div>
-        <div><b>6 / 20</b><span>patients' details showed up in the reply</span></div>
+  <div class="cs-body cs-wide">
+    <section id="users">
+      <div class="eyebrow-s">Who it's for</div>
+      <h2>People asking their most private questions</h2>
+      <p class="lead">To sound more personal, some medical chatbots "remember" earlier conversations and use them as background for new answers. Users assume what they share stays theirs. I asked a simple question: can one user's private details reach another user?</p>
+      <div class="features">
+        <div class="feature"><h3>The user</h3><p>Someone worried about an STI, asking things they wouldn't ask out loud. Trust is the whole reason they use a chatbot instead of a clinic.</p></div>
+        <div class="feature"><h3>The team building it</h3><p>Needs to know where their data can leak, what the law expects, and which fix matters first.</p></div>
       </div>
-      <p>It also got worse over time. When a reply contained someone's details, that reply was saved to memory too, so the same person could leak again in a completely different conversation.</p>
-      <p>The cause: the search over past conversations never checked whose conversation it was. Fixing that is one line, but it is not enough on its own, so I recommended four layers:</p>
-      <p><b>1.</b> Only search the user's own history. <b>2.</b> Remove names and identifying details before storing anything (GDPR data minimisation and privacy by design). <b>3.</b> Only store conversations users actively agreed to share, with the right to delete them (GDPR consent and erasure; Israeli Privacy Protection Law). <b>4.</b> Scan replies for other people's details before sending them.</p>
-      
     </section>
 
-    <section>
-      <h2>What I'd do next</h2>
-      <p>Next I'd rerun the same 20 questions after each fix, to measure how much still leaks. Until a fix is tested that way, there's no proof it works.</p>
+    <section id="decisions">
+      <div class="eyebrow-s">Audit decisions</div>
+      <h2>How I designed the test</h2>
+      <div class="decisions">
+        <div class="decision"><h3>Attack through the normal chat only</h3><dl>
+          <dt>Chose</dt><dd>20 ordinary questions from a regular logged-in account, the kind any worried user would ask.</dd>
+          <dt class="gave">Gave up</dt><dd>Clever hacking techniques that might find more.</dd>
+          <dt>Why</dt><dd>If a normal user can trigger it by accident, it's a product problem, not just a security edge case.</dd></dl></div>
+        <div class="decision"><h3>Measure two levels, not one</h3><dl>
+          <dt>Chose</dt><dd>Track what reached the AI's context and, separately, what it actually said in the reply.</dd>
+          <dt class="gave">Gave up</dt><dd>A single, simpler "did it leak" number.</dd>
+          <dt>Why</dt><dd>A reply that happens to stay quiet is luck, not safety. The exposure starts when the data reaches the model.</dd></dl></div>
+        <div class="decision"><h3>Recommend layers, not a one-line patch</h3><dl>
+          <dt>Chose</dt><dd>Four fixes, each mapped to a privacy principle (GDPR and the Israeli Privacy Protection Law).</dd>
+          <dt class="gave">Gave up</dt><dd>The quick win of shipping just the one-line filter.</dd>
+          <dt>Why</dt><dd>The filter closes this hole, but stored conversations stay a risk until they're minimized, consented to and checked on the way out.</dd></dl></div>
+      </div>
+    </section>
+
+    <section id="under-the-hood">
+      <div class="eyebrow-s">Under the hood</div>
+      <h2>Where the leak comes from</h2>
+      <p>The chatbot merges medical guidelines with a shared memory of every user's past chats, and searches both with no check on whose chat it is. Then the prompt tells the model to base its answer only on what was retrieved.</p>
+      <div class="diagram">
+        <svg viewBox="0 0 980 300" role="img" aria-label="User A's chat is saved into a shared live memory. User B's question searches medical guidelines and the shared memory together, with no user filter. The top results, including User A's chat, go into the prompt, which tells the model to use only the retrieved material. User A's details can appear in User B's reply.">
+          <rect class="box" x="10" y="20" width="190" height="70"/><text class="title" x="105" y="50" text-anchor="middle">User A's chat</text><text class="muted" x="105" y="72" text-anchor="middle">private health details</text>
+          <rect class="box" x="10" y="200" width="190" height="70"/><text class="title" x="105" y="230" text-anchor="middle">User B asks</text><text class="muted" x="105" y="252" text-anchor="middle">a similar question</text>
+          <rect class="box" x="260" y="20" width="200" height="70"/><text class="title" x="360" y="50" text-anchor="middle">Shared live memory</text><text class="muted" x="360" y="72" text-anchor="middle">every user, one list</text>
+          <rect class="box" x="260" y="110" width="200" height="60"/><text class="title" x="360" y="137" text-anchor="middle">Medical guidelines</text><text class="muted" x="360" y="157" text-anchor="middle">CDC, WHO, Q&amp;A</text>
+          <rect class="box warn" x="520" y="90" width="190" height="110"/><text class="title" x="615" y="126" text-anchor="middle">Search, top 3</text><text class="warn-t" x="615" y="152" text-anchor="middle">no user filter</text><text class="muted" x="615" y="176" text-anchor="middle">keyword overlap</text>
+          <rect class="box core" x="770" y="90" width="200" height="110"/><text class="title on-blue" x="870" y="126" text-anchor="middle">LLM prompt</text><text class="on-blue" x="870" y="152" text-anchor="middle" font-size="12" font-weight="600">"use only the material</text><text class="on-blue" x="870" y="170" text-anchor="middle" font-size="12" font-weight="600">provided above"</text>
+          <path class="edge" d="M200 55 H260 M460 55 H490 V120 H520 M460 140 H520 M710 145 H770"/>
+          <path class="edge" d="M200 235 H615 V200"/>
+          <path class="edge bad" d="M870 200 V285 H105 V270"/>
+          <rect x="370" y="268" width="240" height="22" fill="#fff"/><text class="warn-t" x="490" y="284" text-anchor="middle">User A's details in User B's reply</text>
+        </svg>
+      </div>
+      <p class="caption">One missing check, made worse by a prompt that tells the model to quote what it found.</p>
+    </section>
+
+    <section id="results">
+      <div class="eyebrow-s">Results</div>
+      <h2>What leaked, out of 20 fictional patients</h2>
+      <div class="chart wide">
+        <svg viewBox="0 0 760 200" role="img" aria-label="20 of 20 questions pulled in other users' conversations. 18 of 20 patients' details reached the AI. 6 of 20 showed up in another user's reply.">
+          <rect class="bar" x="0" y="10" width="740" height="40"/><text class="val on-blue" x="16" y="36">20 / 20</text><text class="lbl on-blue" x="110" y="36">questions pulled in other users' conversations</text>
+          <rect class="bar" x="0" y="74" width="666" height="40"/><text class="val on-blue" x="16" y="100">18 / 20</text><text class="lbl on-blue" x="110" y="100">patients' details reached the AI</text>
+          <rect class="bar" x="0" y="138" width="222" height="40"/><text class="val on-blue" x="16" y="164">6 / 20</text><text class="lbl" x="236" y="164">patients' details showed up in another user's reply</text>
+        </svg>
+      </div>
+      <p>It also compounds. A reply that contained someone's details was saved to memory too, so the same person could leak again in a completely different conversation.</p>
+      <h2 class="sub">The fix, in four layers</h2>
+      <div class="features">
+        <div class="feature"><h3>1. Search only your own history</h3><p>The one missing check. Closes this specific leak.</p></div>
+        <div class="feature"><h3>2. Strip identifying details</h3><p>Before anything is stored. GDPR data minimisation and privacy by design.</p></div>
+        <div class="feature"><h3>3. Store only with consent</h3><p>Only conversations users chose to share, with the right to delete them. GDPR consent and erasure; Israeli Privacy Protection Law.</p></div>
+        <div class="feature"><h3>4. Check replies on the way out</h3><p>Scan every answer for other people's details before it's sent.</p></div>
+      </div>
+    </section>
+
+    <section id="next">
+      <div class="eyebrow-s">What I'd measure next</div>
+      <h2>Prove each fix works</h2>
+      <div class="next-box">
+        <p><b>The metric:</b> leak rate at both levels, into the model and into the reply, for the same 20 questions.</p>
+        <p><b>How:</b> rerun the attack after each layer is added, and keep it as an automated test so a future change can't bring the leak back.</p>
+      </div>
     </section>
   </div>
 
-  <div class="next-cs"><a class="t" href="values-under-pressure.html">Next: State, Not Trait <span>→</span></a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+  <div class="next-cs"><a class="t" href="sugarbuddy-and-beyond.html">Next: SugarBuddy and Beyond <span>→</span></a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
 </div>
 
 <footer>

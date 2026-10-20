@@ -319,3 +319,4 @@ footer .btn.ghost { background:transparent; color:#fff; }
   .diagram svg, .chart.wide svg { min-width:720px; }
 }
 .frame-browser + .caption { margin:14px 0 8px; }
+.chart svg text.on-blue { fill:#fff; }
