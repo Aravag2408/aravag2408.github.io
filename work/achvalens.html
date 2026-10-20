@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AchvaLens · Arava Gendelman</title>
-<meta name="description" content="Case study: an AI scanner that helps a nonprofit catch harmful LGBTQ+ language in academic texts.">
-<meta property="og:title" content="AchvaLens · case study">
+<meta name="description" content="Product: an AI scanner that helps a nonprofit catch harmful LGBTQ+ language in academic texts.">
+<meta property="og:title" content="AchvaLens · Arava Gendelman">
 <meta property="og:description" content="An AI scanner for Achva LGBT. Accuracy went from 63.6% to 69.8% with automated prompt optimization.">
 <meta property="og:image" content="https://aravag2408.github.io/assets/img/achvalens.png">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
@@ -22,51 +22,110 @@
 
   <header class="cs-head">
     <div>
-      <div class="meta"><span class="tag b">Case study</span><span class="tag">AI</span><span class="tag">Nonprofit client</span></div>
+      <div class="meta"><span class="tag b">Live product</span><span class="tag">AI</span><span class="tag">LLM evaluation</span><span class="tag">Nonprofit client</span></div>
       <h1>AchvaLens</h1>
-      <p class="sum">An AI scanner that helps a nonprofit catch outdated or harmful LGBTQ+ language in academic texts, before it gets published.</p>
-      <div class="actions"><a class="btn" href="https://achvalens-b7f0htgxhyc7fsbt.israelcentral-01.azurewebsites.net/" target="_blank" rel="noopener">Try the live app ↗</a><small>It may take a few seconds to wake up.</small></div>
+      <p class="sum">An AI scanner for Achva LGBT that marks every LGBTQ+ term in a text green, yellow or red, explains why, and hands back an audit report. Built for a real client, measured against their own guidelines.</p>
+      <div class="actions"><a class="btn" href="https://achvalens-b7f0htgxhyc7fsbt.israelcentral-01.azurewebsites.net/app" target="_blank" rel="noopener">Try the live app ↗</a><small>It may take a few seconds to wake up.</small></div>
     </div>
     <dl class="facts">
       <dt>My role</dt><dd>Led the model research, set up the deployment to Azure, built document upload and the PDF and CSV reports, and wrote the accuracy benchmark.</dd>
       <dt>Team</dt><dd>Four students, with Achva LGBT as the client</dd>
       <dt>When</dt><dd>2026</dd>
-      <dt>Tools</dt><dd>Python, DSPy, GPT-4o on Azure OpenAI, Flask, Docker, Azure</dd>
+      <dt>Stack</dt><dd>Python, DSPy, GPT-4o on Azure OpenAI, Flask, SQLite, Docker, Azure App Service</dd>
     </dl>
   </header>
 
-  <div class="cs-body">
-    <section>
-      <h2>The problem</h2>
-      <p>Achva LGBT reviews academic and professional texts for language that is outdated or harmful to LGBTQ+ people. Doing it by hand is slow, and different reviewers draw the line in different places, especially between "a bit outdated" and "actually harmful".</p>
+  <div class="frame-browser"><img src="../assets/img/al-scan.webp" alt="The AchvaLens analysis workspace: a clinical sentence with 'biological sex' and 'sex reassignment' highlighted yellow and two modern terms highlighted green, next to a 70% inclusivity score and an explanation for each term"></div>
+  <p class="caption">A real scan: two outdated clinical terms marked "reconsider", with an explanation and a better alternative for each.</p>
+
+  <div class="cs-body cs-wide">
+    <section id="users">
+      <div class="eyebrow-s">Who it's for</div>
+      <h2>Reviewers who disagree on the hard cases</h2>
+      <p class="lead">Achva LGBT reviews academic and professional texts for language that is outdated or harmful to LGBTQ+ people. By hand it's slow, and reviewers draw the line in different places, especially between "a bit outdated" and "actually harmful".</p>
+      <div class="features">
+        <div class="feature"><h3>The writer</h3><p>A researcher or student who wants to publish respectfully. Pastes text or uploads a PDF or Word file, and gets a traffic-light report with alternatives.</p></div>
+        <div class="feature"><h3>The reviewer at Achva</h3><p>Wants consistent decisions and less repetitive work. Approves new terms in a dashboard, and those decisions teach the model.</p></div>
+      </div>
     </section>
 
-    <section>
-      <h2>What I did</h2>
-      <div class="step"><div class="n">1</div><div><h3>Turned their guidelines into data</h3><p>We built a labeled list of 834 terms from Achva's guidelines, each marked fine, worth reconsidering, or harmful.</p></div></div>
-      <div class="step"><div class="n">2</div><div><h3>Split one hard decision into two easier ones</h3><p>First: does this phrase need attention at all? Then, only for flagged phrases: should the writer reconsider it, or is it harmful? That is how a human reviewer thinks, and it made each step easier to check.</p></div></div>
-      <div class="step"><div class="n">3</div><div><h3>Let the computer tune the instructions</h3><p>Instead of rewriting the AI's instructions by hand, I used an automated optimizer that tries many versions and keeps the ones that make fewer mistakes on the labeled terms.</p></div></div>
-      <div class="step"><div class="n">4</div><div><h3>Made it something people can use</h3><p>A scanner where you paste text or upload a PDF or Word file, a downloadable audit report, and a reviewer dashboard where new terms get approved and fed back into the model.</p></div></div>
+    <section id="decisions">
+      <div class="eyebrow-s">Product decisions</div>
+      <h2>What we chose, and what it cost</h2>
+      <div class="decisions">
+        <div class="decision"><h3>Two easy questions instead of one hard one</h3><dl>
+          <dt>Chose</dt><dd>Stage 1: does this phrase need attention at all? Stage 2, only for flagged phrases: reconsider, or harmful?</dd>
+          <dt class="gave">Gave up</dt><dd>A single, simpler model call.</dd>
+          <dt>Why</dt><dd>That's how a human reviewer thinks, and it made each step measurable on its own. Stage 1 reached 81%.</dd></dl></div>
+        <div class="decision"><h3>Let an optimizer write the instructions</h3><dl>
+          <dt>Chose</dt><dd>DSPy tries many prompt versions and keeps the ones that make fewer mistakes on 834 labeled terms from Achva's guidelines.</dd>
+          <dt class="gave">Gave up</dt><dd>Full control over the exact wording of the prompt.</dd>
+          <dt>Why</dt><dd>Hand-tuning is guesswork. Measuring against the client's own labels turns "it seems better" into a number.</dd></dl></div>
+        <div class="decision"><h3>Humans approve, the model learns</h3><dl>
+          <dt>Chose</dt><dd>New phrases that appear 3+ times enter a review queue. Reviewers label them, and one click retrains the model with no downtime.</dd>
+          <dt class="gave">Gave up</dt><dd>A model that updates itself without anyone checking.</dd>
+          <dt>Why</dt><dd>Language changes, and the client is the authority on it. The product gets better from the reviewers' own decisions.</dd></dl></div>
+      </div>
     </section>
 
-    <section>
-      <h2>The result</h2>
+    <section id="under-the-hood">
+      <div class="eyebrow-s">Under the hood</div>
+      <h2>A two-stage classifier with a feedback loop</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 980 300" role="img" aria-label="Pipeline: a text or document goes to phrase extraction, then stage 1 decides whether each phrase needs attention, then stage 2 decides reconsider or harmful, producing a report. Below, a feedback loop: recurring phrases enter a review queue, reviewers label them, and the model is retrained and hot-reloaded.">
+          <rect class="box" x="10" y="30" width="150" height="76"/><text class="title" x="85" y="62" text-anchor="middle">Text or file</text><text class="muted" x="85" y="84" text-anchor="middle">paste, PDF, Word</text>
+          <rect class="box" x="200" y="30" width="160" height="76"/><text class="title" x="280" y="62" text-anchor="middle">Extract phrases</text><text class="muted" x="280" y="84" text-anchor="middle">LGBTQ+-relevant</text>
+          <rect class="box core" x="400" y="30" width="170" height="76"/><text class="title on-blue" x="485" y="62" text-anchor="middle">Stage 1</text><text class="on-blue" x="485" y="84" text-anchor="middle" font-size="12" font-weight="600">needs attention?</text>
+          <rect class="box core" x="610" y="30" width="170" height="76"/><text class="title on-blue" x="695" y="62" text-anchor="middle">Stage 2</text><text class="on-blue" x="695" y="84" text-anchor="middle" font-size="12" font-weight="600">reconsider or harmful?</text>
+          <rect class="box" x="820" y="30" width="150" height="76"/><text class="title" x="895" y="62" text-anchor="middle">Report</text><text class="muted" x="895" y="84" text-anchor="middle">PDF / CSV</text>
+          <path class="edge" d="M160 68 H200 M360 68 H400 M570 68 H610 M780 68 H820"/>
+          <rect class="box" x="200" y="200" width="200" height="70"/><text class="title" x="300" y="230" text-anchor="middle">Review queue</text><text class="muted" x="300" y="252" text-anchor="middle">phrases seen 3+ times</text>
+          <rect class="box" x="440" y="200" width="200" height="70"/><text class="title" x="540" y="230" text-anchor="middle">Reviewer labels</text><text class="muted" x="540" y="252" text-anchor="middle">in the dashboard</text>
+          <rect class="box" x="680" y="200" width="200" height="70"/><text class="title" x="780" y="230" text-anchor="middle">Retrain + hot reload</text><text class="muted" x="780" y="252" text-anchor="middle">DSPy, no downtime</text>
+          <path class="edge" d="M280 106 V200 M400 235 H440 M640 235 H680"/>
+          <path class="edge" d="M880 235 H930 V150 H695 V106" stroke-dasharray="5 4"/>
+          <text class="muted" x="720" y="142">better prompts</text>
+        </svg>
+      </div>
+      <p class="caption">The scan path on top, the learning loop below.</p>
+    </section>
+
+    <section id="results">
+      <div class="eyebrow-s">Results</div>
+      <h2>Measured, not guessed</h2>
+      <p>On 162 held-out test terms, before and after the automated optimization:</p>
+      <div class="chart wide">
+        <svg viewBox="0 0 760 230" role="img" aria-label="Overall accuracy rose from 63.6% to 69.8%. F1 for spotting harmful terms rose from 0.52 to 0.67.">
+          <text class="lbl" x="0" y="34">Overall accuracy</text>
+          <rect class="bar ghost" x="200" y="14" width="318" height="26"/><text class="val" x="528" y="34">63.6%</text>
+          <rect class="bar" x="200" y="48" width="349" height="26"/><text class="val" x="559" y="68">69.8%</text>
+          <text class="lbl" x="0" y="144">F1, harmful terms</text>
+          <rect class="bar ghost" x="200" y="124" width="260" height="26"/><text class="val" x="470" y="144">0.52</text>
+          <rect class="bar" x="200" y="158" width="335" height="26"/><text class="val" x="545" y="178">0.67</text>
+          <line class="axis" x1="200" y1="6" x2="200" y2="196"/>
+          <text class="muted" x="200" y="220">0</text><text class="muted" x="700" y="220" text-anchor="end">100% / 1.0</text>
+        </svg>
+        <div class="chart-legend"><span><i style="background:var(--soft)"></i>before</span><span><i style="background:var(--blue)"></i>after optimization</span></div>
+      </div>
       <div class="stat-row">
-        <div><b>63.6% → 69.8%</b><span>overall accuracy on 162 test terms</span></div>
-        <div><b>0.52 → 0.67</b><span>F1 score for spotting harmful terms</span></div>
+        <div><b>+6.2 pts</b><span>overall accuracy, 63.6% → 69.8%</span></div>
+        <div><b>+0.15</b><span>F1 on harmful terms, 0.52 → 0.67</span></div>
         <div><b>81%</b><span>accuracy on "needs attention or not"</span></div>
       </div>
-      <img class="figure" src="../assets/img/achvalens.png" alt="The AchvaLens scanner workspace">
-      <p class="caption">The scanner: paste a text, get every relevant phrase marked green, yellow or red.</p>
     </section>
 
-    <section>
-      <h2>What I'd do next</h2>
-      <p>The middle category, "worth reconsidering", is still the weakest. When I looked closer, the source list had 249 cases where the same word root got different labels. Cleaning that up would probably help more than any further tuning of the model.</p>
+    <section id="next">
+      <div class="eyebrow-s">What I'd measure next</div>
+      <h2>Fix the data before the model</h2>
+      <div class="next-box">
+        <p><b>The weak spot:</b> the middle category, "reconsider". In the source list I found 249 cases where the same word root got different labels. Cleaning that up would likely help more than more tuning.</p>
+        <p><b>The product metric:</b> reviewer minutes saved per document, and how often reviewers override the model's label.</p>
+        <p><b>How:</b> time a sample of reviews with and without the scanner, and track overrides in the dashboard.</p>
+      </div>
     </section>
   </div>
 
-  <div class="next-cs"><a class="t" href="mercury.html">Next: Mercury <span>→</span></a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+  <div class="next-cs"><a class="t" href="values-under-pressure.html">Next: Values Under Pressure <span>→</span></a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
 </div>
 
 <footer>
