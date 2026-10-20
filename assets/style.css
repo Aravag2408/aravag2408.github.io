@@ -335,3 +335,13 @@ footer .btn.ghost { background:transparent; color:#fff; }
 .visual.card-chart text.on-blue { fill:#fff; }
 .visual.card-chart .lbl { font-size:22px; }
 .visual.card-chart .muted, .visual.card-chart .eyebrow-t { font-size:21px; }
+/* Home: Hands-on with (compact) */
+.build { padding:72px 0 80px; }
+.build h2 { font-size:32px; }
+.tried { list-style:none; display:grid; grid-template-columns:repeat(2,1fr); gap:0 40px; margin-top:28px; border-top:2px solid var(--ink); }
+.tried li { border-bottom:1.5px solid #d6d9e6; }
+.tried a { display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:14px 2px; text-decoration:none; color:var(--ink); }
+.tried a:hover b { color:var(--blue); }
+.tried b { font-size:17px; font-weight:800; }
+.tried span { font-size:13px; font-weight:600; color:var(--muted); text-align:right; }
+@media (max-width: 860px) { .tried { grid-template-columns:1fr; } .build h2 { font-size:28px; } }
