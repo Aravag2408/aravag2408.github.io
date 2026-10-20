@@ -320,3 +320,15 @@ footer .btn.ghost { background:transparent; color:#fff; }
 }
 .frame-browser + .caption { margin:14px 0 8px; }
 .chart svg text.on-blue { fill:#fff; }
+/* Work cards v2 */
+.visual.frame-browser img { aspect-ratio:16/10; object-fit:cover; object-position:top left; }
+.visual.card-chart { background:#fff; }
+.visual.card-chart svg { width:100%; height:auto; aspect-ratio:16/10; display:block; }
+.visual.card-chart text { font-family:'Plus Jakarta Sans',system-ui,sans-serif; fill:var(--ink); }
+.visual.card-chart .lbl { font-size:20px; font-weight:700; }
+.visual.card-chart .val { font-size:22px; font-weight:800; }
+.visual.card-chart .muted { font-size:16px; font-weight:600; fill:var(--muted); }
+.visual.card-chart .eyebrow-t { font-size:16px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; fill:var(--blue-text); }
+.visual.card-chart .bar { fill:var(--blue); stroke:var(--ink); stroke-width:2; }
+.visual.card-chart .bar.ghost { fill:var(--soft); }
+.visual.card-chart text.on-blue { fill:#fff; }

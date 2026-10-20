@@ -23,74 +23,86 @@
   <header class="page">
     <svg class="scribble" viewBox="0 0 120 120" aria-hidden="true"><path d="M70 20 C 20 10, 10 80, 55 95 C 100 110, 115 50, 80 35 C 55 25, 40 60, 62 70" stroke="#2f5bff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
     <h1>Work<span>.</span></h1>
-    <p>Things I've built and investigated. Each one started with a problem someone actually had.</p>
+    <p>Products I built and problems I investigated, biggest first. Each one started with a problem someone actually had.</p>
   </header>
 
   <section class="project">
-    <div class="visual"><img src="assets/img/sb-event.jpg" alt="SugarBuddy, the teen's home screen during a low-glucose event"></div>
+    <div class="visual frame-browser"><img src="assets/img/sb-hero.webp" alt="SugarBuddy's sign-in screen with the app's robot mascot and a glucose chart"></div>
     <div>
-      <div class="meta"><span class="tag b">Case study</span><span class="tag">Full stack</span><span class="tag">Health</span><span class="tag">Team</span></div>
+      <div class="meta"><span class="tag b">Live product</span><span class="tag">Full stack</span><span class="tag">AI agent</span><span class="tag">Team</span></div>
       <h2>SugarBuddy</h2>
-      <p>A full-stack app for teens with Type 1 diabetes and their families: live glucose alerts, a short check-in with the teen, an AI agent that works out what probably happened, and a community. I built most of it, ran it on Azure, and when the budget ran out I moved it myself to a setup that costs nothing, so it stays live.</p>
-      <div class="num"><b>Azure → $0</b> and still live</div>
-      <div class="actions"><a class="btn" href="work/sugarbuddy.html">Read the case study</a><a class="t" href="https://sugarbuddy.netlify.app" target="_blank" rel="noopener">Live app ↗</a><small>The code is private.</small></div>
+      <p>For teens with Type 1 diabetes and their parents. When glucose goes wrong, it runs a short check-in with the teen, an AI agent explains what probably happened, and the parent gets a calm next step. I built most of it and kept it live at $0.</p>
+      <div class="num"><b>417 / 532</b> commits mine · ~735 tests</div>
+      <div class="actions"><a class="btn" href="work/sugarbuddy.html">See the product</a><a class="t" href="https://sugarbuddy.netlify.app" target="_blank" rel="noopener">Live app ↗</a><small>The code is private.</small></div>
     </div>
   </section>
 
   <section class="project flip">
-    <div class="visual"><img src="assets/img/achvalens.png" alt="The AchvaLens scanner, where a user pastes a text to check its LGBTQ+ terminology"></div>
+    <div class="visual frame-browser"><img src="assets/img/al-scan.webp" alt="The AchvaLens scanner with outdated terms highlighted yellow, modern terms green, and a 70% inclusivity score"></div>
     <div>
-      <div class="meta"><span class="tag b">Case study</span><span class="tag">AI</span><span class="tag">Nonprofit client</span><span class="tag">Team</span></div>
+      <div class="meta"><span class="tag b">Live product</span><span class="tag">AI</span><span class="tag">Nonprofit client</span><span class="tag">Team</span></div>
       <h2>AchvaLens</h2>
-      <p>Built for Achva LGBT. You paste in an academic text and it marks LGBTQ+ terminology as fine, worth reconsidering, or harmful. The middle category was the hardest. Automated prompt optimization raised overall accuracy.</p>
-      <div class="num"><b>63.6% → 69.8%</b> overall accuracy</div>
-      <div class="actions"><a class="btn" href="work/achvalens.html">Read the case study</a><a class="t" href="https://achvalens-b7f0htgxhyc7fsbt.israelcentral-01.azurewebsites.net/" target="_blank" rel="noopener">Live app ↗</a><small>The live app may take a few seconds to wake up.</small></div>
+      <p>For Achva LGBT's reviewers. Paste a text or upload a file, and every LGBTQ+ term is marked green, yellow or red with an explanation. Reviewer decisions retrain the model.</p>
+      <div class="num"><b>63.6% → 69.8%</b> accuracy after automated optimization</div>
+      <div class="actions"><a class="btn" href="work/achvalens.html">See the product</a><a class="t" href="https://achvalens-b7f0htgxhyc7fsbt.israelcentral-01.azurewebsites.net/app" target="_blank" rel="noopener">Live app ↗</a><small>The live app may take a few seconds to wake up.</small></div>
     </div>
   </section>
 
   <section class="project">
-    <div class="visual"><div class="funnel" role="img" aria-label="Audit results: 20 of 20 questions pulled in other users' conversations, 18 of 20 test patients' details reached the AI, 6 of 20 showed up in a reply.">
-      <div class="f-row"><div class="f-bar" style="width:100%"></div><b>20 / 20</b><span>questions pulled in other users' conversations</span></div>
-      <div class="f-row"><div class="f-bar" style="width:90%"></div><b>18 / 20</b><span>test patients' details reached the AI</span></div>
-      <div class="f-row"><div class="f-bar" style="width:30%"></div><b>6 / 20</b><span>showed up in another user's reply</span></div>
-    </div></div>
+    <div class="visual card-chart"><svg viewBox="0 0 640 400" role="img" aria-label="Agreement with experts, weighted kappa. Justice orientation: experts 0.707, AI judge 0.700. Argument quality: experts 0.555, AI judge 0.569.">
+      <text class="eyebrow-t" x="40" y="56">AI judge vs. human experts (κ)</text>
+      <text class="lbl" x="40" y="118">Justice orientation</text>
+      <rect class="bar ghost" x="40" y="132" width="424" height="34"/><text class="val" x="476" y="157">0.707</text>
+      <rect class="bar" x="40" y="174" width="420" height="34"/><text class="val" x="472" y="199">0.700</text>
+      <text class="lbl" x="40" y="262">Argument quality</text>
+      <rect class="bar ghost" x="40" y="276" width="333" height="34"/><text class="val" x="385" y="301">0.555</text>
+      <rect class="bar" x="40" y="318" width="341" height="34"/><text class="val" x="393" y="343">0.569</text>
+    </svg></div>
     <div>
-      <div class="meta"><span class="tag b">Case study</span><span class="tag">Privacy</span><span class="tag">Risk audit</span><span class="tag">Solo</span></div>
-      <h2>Mercury</h2>
-      <p>A privacy audit of a medical chatbot. A stranger's private health details could end up in your answer, just by asking a similar question. I traced it to one missing check and mapped the fixes to GDPR.</p>
-      <div class="num"><b>18 of 20</b> patients' details reached the model</div>
-      <div class="actions"><a class="btn" href="work/mercury.html">Read the case study</a><a class="t" href="https://mercury-audit.onrender.com/" target="_blank" rel="noopener">Live demo ↗</a><small>The live demo may take a few seconds to wake up.</small></div>
+      <div class="meta"><span class="tag b">Data &amp; AI research</span><span class="tag">LLM-as-a-judge</span><span class="tag">Statistics</span></div>
+      <h2>Values Under Pressure</h2>
+      <p>Do people do what they say they believe? I analyzed 42 players of a democracy simulation game, and built an AI grader for 480 written answers that agrees with experts as well as they agree with each other. The answer: values shift with the situation.</p>
+      <div class="num"><b>0 of 42</b> players held a fixed orientation</div>
+      <div class="actions"><a class="btn" href="work/values-under-pressure.html">See the study</a></div>
     </div>
   </section>
 
   <section class="project flip">
-    <div class="visual"><img class="fit" src="assets/img/decisions.png" alt="Grid of 42 participants by 12 decisions, colored by reasoning type: almost every row mixes several colors"></div>
+    <div class="visual frame-browser"><img src="assets/img/mercury-home.webp" alt="Mercury's home screen, promising private and confidential answers to sexual-health questions"></div>
     <div>
-      <div class="meta"><span class="tag b">Case study</span><span class="tag">Research</span><span class="tag">Statistics</span></div>
-      <h2>State, Not Trait</h2>
-      <p>Do people hold steady values, or does it depend on how you ask? I analyzed 42 players of a democracy simulation game. It depends. I also built an AI grader for 480 written answers that agreed with two experts about as well as they agreed with each other.</p>
-      <div class="num"><b>480</b> answers graded and validated</div>
-      <div class="actions"><a class="btn" href="work/values-under-pressure.html">Read the case study</a></div>
+      <div class="meta"><span class="tag b">Risk audit</span><span class="tag">RAG</span><span class="tag">Privacy</span><span class="tag">Solo</span></div>
+      <h2>Mercury</h2>
+      <p>A privacy audit of a RAG medical chatbot that promises confidentiality. Asking ordinary questions from a second account pulled strangers' health details into the AI's answers. I traced it to one missing check and mapped four fixes to GDPR.</p>
+      <div class="num"><b>18 of 20</b> patients' details reached the model</div>
+      <div class="actions"><a class="btn" href="work/mercury.html">See the audit</a><a class="t" href="https://mercury-audit.onrender.com/" target="_blank" rel="noopener">Live demo ↗</a><small>The live demo may take a few seconds to wake up.</small></div>
     </div>
   </section>
 
   <section class="project">
-    <div class="visual"><div class="funnel" role="img" aria-label="10 of 10 datasets built and evaluated, 5 of 10 passed the benchmark's curation bar, 145 of 145 literature citations checked individually.">
-      <div class="f-row"><div class="f-bar" style="width:100%"></div><b>10 / 10</b><span>synthetic datasets built and evaluated end to end</span></div>
-      <div class="f-row"><div class="f-bar" style="width:50%"></div><b>5 / 10</b><span>passed the benchmark's full curation criteria</span></div>
-      <div class="f-row"><div class="f-bar" style="width:100%"></div><b>145 / 145</b><span>literature citations checked individually before submitting</span></div>
-    </div></div>
+    <div class="visual card-chart"><svg viewBox="0 0 640 400" role="img" aria-label="Ten benchmark datasets built, five passed the full curation criteria, SugarBuddy among them.">
+      <text class="eyebrow-t" x="40" y="56">10 datasets built · 5 passed</text>
+      <rect class="bar" x="40" y="96" width="96" height="96"/><rect class="bar" x="152" y="96" width="96" height="96"/><rect class="bar" x="264" y="96" width="96" height="96"/><rect class="bar" x="376" y="96" width="96" height="96"/><rect class="bar" x="488" y="96" width="96" height="96"/>
+      <rect class="bar ghost" x="40" y="208" width="96" height="96"/><rect class="bar ghost" x="152" y="208" width="96" height="96"/><rect class="bar ghost" x="264" y="208" width="96" height="96"/><rect class="bar ghost" x="376" y="208" width="96" height="96"/><rect class="bar ghost" x="488" y="208" width="96" height="96"/>
+      <text class="val on-blue" x="88" y="150" text-anchor="middle">SB</text>
+      <text class="muted" x="40" y="344">SB = SugarBuddy, the main dataset: 5 of 5 learners passed</text>
+    </svg></div>
     <div>
-      <div class="meta"><span class="tag b">Case study</span><span class="tag">NLP</span><span class="tag">Benchmark data</span><span class="tag">Solo</span></div>
+      <div class="meta"><span class="tag b">Data product</span><span class="tag">NLP</span><span class="tag">Benchmark data</span><span class="tag">Solo</span></div>
       <h2>SugarBuddy and Beyond</h2>
-      <p>For an NLP course, I turned SugarBuddy's check-in into a synthetic benchmark dataset: structured readings and a teen's free-text note, labeled with the real cause from a 94-cause taxonomy I grounded in the literature. All 5 tabular learners passed cleanly. I generalized the method to nine more pediatric conditions, reaching the course's top tier.</p>
-      <div class="num"><b>5 of 10</b> datasets passed the benchmark's curation bar</div>
-      <div class="actions"><a class="btn" href="work/sugarbuddy-and-beyond.html">Read the case study</a><small>The code and paper are private.</small></div>
+      <p>I turned SugarBuddy's check-in into a benchmark dataset that pairs sensor-style data with a teen's note, built a probe that catches notes that give the answer away, and made it a template I ran on nine more conditions.</p>
+      <div class="num"><b>145 / 145</b> medical citations checked</div>
+      <div class="actions"><a class="btn" href="work/sugarbuddy-and-beyond.html">See the dataset</a><small>The code and paper are private.</small></div>
     </div>
   </section>
 
   <div class="more-h"><h2>Small projects</h2><p>Shorter stories, from courses and a hackathon.</p></div>
   <div class="small-grid">
+    <div class="sm">
+      <img class="sm-img fit" src="assets/img/pb-fairness.png" alt="Line chart: the fairness score falls from 0.72 to 0.43 as project costs are multiplied up to 50 times" loading="lazy">
+      <div class="meta"><span class="tag">Social choice</span><span class="tag">Data</span></div>
+      <h3>Fair city budgets, Warsaw 2023</h3>
+      <p>Does a fairer way to split a city budget cost more? I tested a proportional voting rule, the Method of Equal Shares, on Warsaw's real 2023 participatory budget (78,904 voters). It beat the city's current rule on both welfare (+32%) and fairness (+8%). But as projects get more expensive, it slowly turns back into the old rule.</p>
+    </div>
     <div class="sm">
       <img class="sm-img" src="assets/img/agent.jpg" alt="The SugarBuddy Agent: a text box where a parent describes a glucose event" loading="lazy">
       <div class="meta"><span class="tag">AI agent</span><span class="tag">Team</span></div>
@@ -99,17 +111,11 @@
       <div class="sm-links"><a href="https://suger-buddy-agent.vercel.app" target="_blank" rel="noopener">Live demo ↗</a><a href="https://github.com/Aravag2408/SugerBuddy_Agent" target="_blank" rel="noopener">Code ↗</a></div>
     </div>
     <div class="sm">
-      <div class="sm-duo"><img src="assets/img/btl-board.jpg" alt="Between the Lines: a coach's weekly coaching board" loading="lazy"><img src="assets/img/btl-team.jpg" alt="Between the Lines: team view with usage of 12 teaching methods and a recommendation" loading="lazy"></div>
+      <div class="sm-duo"><img src="assets/img/btl-board.webp" alt="Between the Lines: a coach's weekly coaching board" loading="lazy"><img src="assets/img/btl-team.webp" alt="Between the Lines: team view with usage of 12 teaching methods and a recommendation" loading="lazy"></div>
       <div class="meta"><span class="tag">Education</span><span class="tag">Hackathon</span></div>
       <h3>Between the Lines</h3>
       <p>A hackathon project with The Israeli Center for Educational Innovation: a workspace for teaching coaches. A weekly coaching board, five kinds of coaching activities, and a team view that shows which of 12 teaching methods are in use and recommends what to focus on next. I helped define the problem and the solution with the partner, then built the app.</p>
       <div class="sm-links"><a href="https://canva.link/tpksz03aqaskej8" target="_blank" rel="noopener">Pitch deck ↗</a><a href="https://teach-between-lines.base44.app" target="_blank" rel="noopener">App (login required) ↗</a></div>
-    </div>
-    <div class="sm">
-      <img class="sm-img fit" src="assets/img/pb-fairness.png" alt="Line chart: the fairness score falls from 0.72 to 0.43 as project costs are multiplied up to 50 times" loading="lazy">
-      <div class="meta"><span class="tag">Social choice</span><span class="tag">Data</span></div>
-      <h3>Fair city budgets, Warsaw 2023</h3>
-      <p>Does a fairer way to split a city budget cost more? I tested a proportional voting rule, the Method of Equal Shares, on Warsaw's real 2023 participatory budget (78,904 voters). It beat the city's current rule on both welfare (+32%) and fairness (+8%). But as projects get more expensive, it slowly turns back into the old rule.</p>
     </div>
     <div class="sm">
       <img class="sm-img fit" src="assets/img/sim-time.png" alt="Bar chart: time to finish all work falls from 58 thousand to 23 thousand time units as standardization goes from low to very high" loading="lazy">
