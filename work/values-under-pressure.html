@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Values Under Pressure · Arava Gendelman</title>
+<meta name="description" content="Do people do what they say they believe? A data and LLM-as-a-judge study of 42 players in a democracy simulation game.">
+<meta property="og:title" content="Values Under Pressure · Arava Gendelman">
+<meta property="og:description" content="An AI grader that matches expert agreement, and a clear finding: values shift with the situation.">
+<meta property="og:image" content="https://aravag2408.github.io/assets/img/og.png">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="../index.html">arava<span>.</span></a>
+    <div class="links"><a class="on" href="../work.html">Work</a><a href="https://www.linkedin.com/in/arava-gendelman" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+  </nav>
+
+  <header class="cs-head">
+    <div>
+      <div class="meta"><span class="tag b">Data &amp; AI research</span><span class="tag">LLM-as-a-judge</span><span class="tag">Statistics</span></div>
+      <h1>Values Under Pressure</h1>
+      <p class="sum">Do people actually do what they say they believe? I analyzed how 42 players reasoned about justice in a democracy simulation game, and built an AI grader for their 480 written answers that agrees with experts as well as the experts agree with each other.</p>
+    </div>
+    <dl class="facts">
+      <dt>My role</dt><dd>The data analysis and modeling: the AI grader and its validation, the statistics, the clustering, and an AI-player simulation. The data was collected by the research team.</dd>
+      <dt>Team</dt><dd>Research team, Technion and Bar-Ilan University</dd>
+      <dt>When</dt><dd>2026</dd>
+      <dt>Stack</dt><dd>Python, pandas, SciPy, statsmodels, scikit-learn, Jupyter, OpenAI-compatible LLM APIs</dd>
+    </dl>
+  </header>
+
+  <div class="cs-body cs-wide">
+    <section id="users">
+      <div class="eyebrow-s">Who it's for</div>
+      <h2>A research team with 480 answers nobody could grade</h2>
+      <p class="lead">Players faced dilemmas in two fictional worlds, 1950 and 2050. Each dilemma was asked three ways: a quick multiple-choice click, a written explanation, and a reply to a pressure question. The team wanted to know whether a person's sense of justice is a stable trait, or a state that shifts with the situation.</p>
+      <div class="features">
+        <div class="feature"><h3>The researchers</h3><p>Needed every written answer scored on two scales, justice orientation and argument quality. Coding 480 answers by hand twice wasn't realistic.</p></div>
+        <div class="feature"><h3>The educators</h3><p>Run the game in class and want to know what it actually reveals about students, and what format of question to trust.</p></div>
+      </div>
+    </section>
+
+    <section id="decisions">
+      <div class="eyebrow-s">Key decisions</div>
+      <h2>How I made the AI grader trustworthy</h2>
+      <div class="decisions">
+        <div class="decision"><h3>Use human disagreement as the bar</h3><dl>
+          <dt>Chose</dt><dd>Two experts scored a 10% sample (48 answers). Their agreement with each other became the ceiling the AI had to reach.</dd>
+          <dt class="gave">Gave up</dt><dd>A simple "accuracy" number against one person's labels.</dd>
+          <dt>Why</dt><dd>Experts don't fully agree either. Asking the AI to beat that ceiling would be asking for noise.</dd></dl></div>
+        <div class="decision"><h3>Never tune on the test set</h3><dl>
+          <dt>Chose</dt><dd>Separate answers for examples and for evaluation, bootstrap confidence intervals, and a written protocol to avoid fitting the prompt to the test answers.</dd>
+          <dt class="gave">Gave up</dt><dd>A higher score I couldn't trust.</dd>
+          <dt>Why</dt><dd>With only 48 expert-scored answers, it's easy to fool yourself.</dd></dl></div>
+        <div class="decision"><h3>Compare setups, guard against style bias</h3><dl>
+          <dt>Chose</dt><dd>Several prompt designs (a plain baseline, an anti-style-bias guard, few-shot examples, a decomposed rubric) across several models, measured with weighted Cohen's κ.</dd>
+          <dt class="gave">Gave up</dt><dd>One prompt, written once.</dd>
+          <dt>Why</dt><dd>A grader that rewards well-written answers over the actual reasoning would quietly bias every finding after it.</dd></dl></div>
+      </div>
+    </section>
+
+    <section id="under-the-hood">
+      <div class="eyebrow-s">Under the hood</div>
+      <h2>From raw answers to a clear answer</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 980 120" role="img" aria-label="Pipeline: expert validation, LLM judge experiments, scoring all 480 answers, consistency analysis, clustering and mixed models, then an AI-player simulation for comparison.">
+          <rect class="box" x="4" y="24" width="150" height="72"/><text class="title" x="79" y="54" text-anchor="middle">Expert check</text><text class="muted" x="79" y="76" text-anchor="middle">48 answers, 2 raters</text>
+          <rect class="box core" x="168" y="24" width="150" height="72"/><text class="title on-blue" x="243" y="54" text-anchor="middle">LLM judge</text><text class="on-blue" x="243" y="76" text-anchor="middle" font-size="12" font-weight="600">prompts × models</text>
+          <rect class="box" x="332" y="24" width="150" height="72"/><text class="title" x="407" y="54" text-anchor="middle">Score all 480</text><text class="muted" x="407" y="76" text-anchor="middle">best setup per scale</text>
+          <rect class="box" x="496" y="24" width="150" height="72"/><text class="title" x="571" y="54" text-anchor="middle">Consistency</text><text class="muted" x="571" y="76" text-anchor="middle">tests, correlations</text>
+          <rect class="box" x="660" y="24" width="150" height="72"/><text class="title" x="735" y="54" text-anchor="middle">Personas?</text><text class="muted" x="735" y="76" text-anchor="middle">clustering, mixed models</text>
+          <rect class="box" x="824" y="24" width="150" height="72"/><text class="title" x="899" y="54" text-anchor="middle">AI players</text><text class="muted" x="899" y="76" text-anchor="middle">human vs AI</text>
+          <path class="edge" d="M154 60 H168 M318 60 H332 M482 60 H496 M646 60 H660 M810 60 H824"/>
+        </svg>
+      </div>
+      <p class="caption">Six notebooks, in pipeline order, plus scripts that run AI agents through the same 12 scenarios.</p>
+    </section>
+
+    <section id="results">
+      <div class="eyebrow-s">Results</div>
+      <h2>The AI grader reached the human ceiling</h2>
+      <div class="chart wide">
+        <svg viewBox="0 0 760 210" role="img" aria-label="Weighted Cohen's kappa. Justice orientation: experts with each other 0.707, best AI judge 0.700. Argument quality: experts 0.555, best AI judge 0.569.">
+          <text class="lbl" x="0" y="34">Justice orientation</text>
+          <rect class="bar ghost" x="200" y="14" width="354" height="26"/><text class="val" x="564" y="34">0.707</text>
+          <rect class="bar" x="200" y="48" width="350" height="26"/><text class="val" x="560" y="68">0.700</text>
+          <text class="lbl" x="0" y="134">Argument quality</text>
+          <rect class="bar ghost" x="200" y="114" width="278" height="26"/><text class="val" x="488" y="134">0.555</text>
+          <rect class="bar" x="200" y="148" width="285" height="26"/><text class="val" x="495" y="168">0.569</text>
+          <line class="axis" x1="200" y1="6" x2="200" y2="186"/>
+          <text class="muted" x="200" y="205">0</text><text class="muted" x="700" y="205" text-anchor="end">κ = 1.0</text>
+        </svg>
+        <div class="chart-legend"><span><i style="background:var(--soft)"></i>expert vs expert</span><span><i style="background:var(--blue)"></i>best AI judge vs experts</span></div>
+      </div>
+      <h2 class="sub">And the answer: values are a state, not a trait</h2>
+      <div class="stat-row">
+        <div><b>0 of 42</b><span>players were consistent enough to look like they hold a fixed orientation</span></div>
+        <div><b>r = 0.19</b><span>how well a player's 1950 choices predict their 2050 choices (p = 0.24)</span></div>
+        <div><b>28.7%</b><span>of the time, the click and its own written reason agreed</span></div>
+        <div><b>r ≈ 0.00</b><span>between what players said in a survey and what they did in the game</span></div>
+        <div><b>−0.54</b><span>average shift under the pressure question (p &lt; 0.001)</span></div>
+        <div><b>0.16</b><span>silhouette score: no hidden personas, just one continuous gradient</span></div>
+      </div>
+      <img class="figure" src="../assets/img/decisions.png" alt="Grid of 42 participants by 12 decisions, colored by reasoning type: almost every row mixes several colors" loading="lazy">
+      <p class="caption">Every player, every decision. If values were a fixed trait, each row would be a single color.</p>
+    </section>
+
+    <section id="next">
+      <div class="eyebrow-s">What I'd measure next</div>
+      <h2>From a strong signal to a result</h2>
+      <div class="next-box">
+        <p><b>Bigger and sturdier:</b> 42 players and two raters is the minimum for this kind of check. A third rater and a larger sample would make the findings something I'd call a result.</p>
+        <p><b>For the game itself:</b> since the question format moves the answer, test which format best predicts real choices, and design the game around that.</p>
+        <p><b>Human vs AI:</b> finish comparing the simulated AI players with the humans, to see whether models show the same say-do gap.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="next-cs"><a class="t" href="mercury.html">Next: Mercury <span>→</span></a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div>
+</div>
+
+<footer>
+  <div class="wrap"><h2>Let's talk<span>.</span></h2><div class="foot-links"><a class="btn ghost" href="https://www.linkedin.com/in/arava-gendelman" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn" href="../assets/cv.pdf" download>Download CV</a></div></div>
+</footer>
+</body>
+</html>
