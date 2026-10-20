@@ -301,3 +301,13 @@ footer .btn.ghost { background:transparent; color:#fff; }
   .build { padding:64px 0 72px; }
   .build h2 { font-size:32px; }
 }
+/* Home hero v2: product/data headline */
+.hero .hi { font-size:24px; font-weight:800; letter-spacing:-.02em; margin:18px 0 10px; }
+.hero .hi .dot { color:var(--blue); }
+.hero h1.head { font-size:54px; line-height:1.08; letter-spacing:-.035em; margin:0 0 26px; max-width:640px; }
+.hero h1.head .blue { color:var(--blue); }
+.hero h1.head .hl svg { bottom:-10px; }
+@media (max-width: 860px) {
+  .hero h1.head { font-size:36px; }
+  .hero h1.head .hl { white-space:normal; }
+}
